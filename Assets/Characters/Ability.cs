@@ -12,10 +12,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability : MonoBehaviour
+public abstract class Ability : ScriptableObject
 {
+	[Header("- Ability Information -")]
 	public string abilityName;
 	public string abilityDescription;
-	public int abilityDamage;
-	public GameObject abilityPrefab;		
+	public float cooldownPeriod;
+	[Tooltip("The amount the ability will do.\nFor example:\n  It will heal for abilityValue;\n  It will damage for abilityValue.")]
+	public float abilityValue;
+
+	protected float cooldownSecondsRemaining;
+
+	[Header("- Ability Variables -")]
+	[Tooltip("The object that will be spawned if appropiate.")]
+	public GameObject abilityPrefab;
+	public Animation abilityanimation;
+	//public Particle abilityParticle;
+
+	public abstract void Start();
+	public abstract void Update();
+	public abstract void Use();
 }

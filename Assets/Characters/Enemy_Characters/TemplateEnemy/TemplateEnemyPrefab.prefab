@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212292920288096976}
   - component: {fileID: 114399497594982440}
   m_Layer: 0
-  m_Name: TemplateEntitySprite
+  m_Name: TemplateEnemyPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,9 @@ MonoBehaviour:
   isPlayer: 0
   isDead: 0
   entityPrefab: {fileID: 0}
-  entityAbilities: []
+  entityAbilities:
+  - {fileID: 11400000, guid: aa0e795b0f0b8f94c838cf4bcb21f037, type: 2}
+  - {fileID: 11400000, guid: 51ef585c4d2fcba4bb8e88f0e113cb60, type: 2}
   entityDrops: []
 --- !u!212 &212292920288096976
 SpriteRenderer:

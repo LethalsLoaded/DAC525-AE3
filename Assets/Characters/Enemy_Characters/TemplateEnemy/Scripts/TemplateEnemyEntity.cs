@@ -8,8 +8,6 @@
  * NAME, DATE OF EDIT, CONTENT EDITED:
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -20,7 +18,7 @@ public class TemplateEnemyEntity : Entity
 {
     protected override void OnSpawn()
     {
-        // Do stuff when spawned
+        // Do stuff when entity is spawned
     }
 
     protected override void OnDeath(Entity entityKiller = null)
