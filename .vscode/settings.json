@@ -52,5 +52,28 @@
         "ProjectSettings/":true,
         "temp/":true,
         "Temp/":true
+    },
+    "fileHeaderComment.parameter":
+    {
+        "*":
+        {
+            "author": "Daniel Wesolowski",
+            "project": "DAC525-AE3"
+        }
+    },
+    "fileHeaderComment.template":
+    {
+        "*":
+        [
+            "${commentBegin}",
+            "${commentprefix} This file has been created by ${author} for ${project}",
+            "${commentprefix} on ${date}. Everything in this file is written",
+            "${commentprefix} by ${author} unless specified otherwise in a comment",
+            "${commentprefix} or if the file has been edited by another developer which",
+            "${commentprefix} is to be named below with the content added or modified mentioned",
+            "${commentprefix}",
+            "${commentprefix} NAME, DATE OF EDIT, CONTENT EDITED:",
+            "${commentend}"
+        ]
     }
 }
