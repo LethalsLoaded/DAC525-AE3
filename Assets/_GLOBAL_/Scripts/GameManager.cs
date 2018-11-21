@@ -32,11 +32,10 @@ public class GameManager : MonoBehaviour
 	#endregion
 
 	#region PUBLIC_VARIABLES_HIDDEN_INSPECTOR
-	// PUBLIC VARIABLES, NOT SHOWN IN INSPECTOR
 	#endregion
 
 	#region PRIVATE_VARIABLES
-	// PRIVATE VARIABLES
+	private static GameManager instance = null;
 	private int lives;
 	#endregion
 
@@ -88,17 +87,27 @@ public class GameManager : MonoBehaviour
 		return true;
 	}
 
+	/// <summary>
+	/// Returns an instance of the Game Manager.
+	/// If null, throws an exception.
+	/// </summary>
+	/// <returns>Instance of GameManager</returns>
+	public static GameManager GetInstance()
+	{
+		if(instance == null) throw new System.Exception("Game Manager hasn't been initialaized.");
+		return instance;
+	}
+
 	#endregion
 
 	#region PRIVATE_METHODS
-	// PRIVATE METHODS
-	void Start()
+	void Awake()
 	{
-		// Destroy self if we already have a game manager up and running.
-		if(GameObject.FindGameObjectsWithTag("PERS_GAME_MANAGER").Length > 0)
-			Destroy(this.gameObject);
+		if (instance == null) instance = this;
+		else if (instance != this) Destroy(gameObject);
 
-		// Initialaize variables
+		DontDestroyOnLoad(gameObject);
+
 		lives = startingLives;
 	}
 

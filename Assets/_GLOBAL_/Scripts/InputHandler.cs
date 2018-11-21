@@ -13,5 +13,14 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-	
+	void Start()
+    {
+        // Ensure that we have MT enabled.
+        Input.multiTouchEnabled = true;
+    }
+
+    void Update()
+    {
+        GameManager gameManager = GameManager.GetInstance();
+    }
 }

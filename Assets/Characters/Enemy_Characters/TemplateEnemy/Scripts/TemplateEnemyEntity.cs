@@ -19,6 +19,7 @@ public class TemplateEnemyEntity : Entity
     protected override void OnSpawn()
     {
         // Do stuff when entity is spawned
+        Debug.Log(GameManager.GetInstance().GetLives());
     }
 
     protected override void OnDeath(Entity entityKiller = null)
