@@ -8,6 +8,7 @@
  * NAME, DATE OF EDIT, CONTENT EDITED:
  */
 
+using System;
 using UnityEngine;
 
 public enum ItemCategory
@@ -18,6 +19,7 @@ public enum ItemCategory
 }
 public abstract class Item : ScriptableObject 
 {
+	private Guid itemID;
 	[Header("- Item Information -")]
 	public string itemName;
 	public string itemDescription;
@@ -30,8 +32,13 @@ public abstract class Item : ScriptableObject
 	public Sprite itemSprite;
 	public GameObject itemPrefab;
 	
-
-
 	public abstract void Use();
 	
+	public Guid GetID()
+	{
+		if(itemID.ToString() == "00000000-0000-0000-0000-000000000000")
+			itemID = Guid.NewGuid();
+
+		return itemID;
+	}
 }

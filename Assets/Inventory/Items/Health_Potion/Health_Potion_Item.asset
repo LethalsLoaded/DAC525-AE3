@@ -11,9 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9a0e48ea86b9a4a818bbf9049e387d, type: 3}
   m_Name: Health_Potion_Item
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  sprite: {fileID: 0}
+  itemName: Abc
+  itemDescription: Def
+  itemCategory: 0
   itemValue: 0
-  price: 0
-  weight: 0
+  itemPrice: 0
+  itemWeight: 0
+  itemSprite: {fileID: 21300016, guid: ae3918a914038694d852d0bb81f62473, type: 3}
+  itemPrefab: {fileID: 0}
