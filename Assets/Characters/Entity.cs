@@ -23,6 +23,18 @@ public enum EntityType
 	UNDEAD
 }
 
+public enum Direction
+{
+	NORTH,
+	NORTH_EAST,
+	EAST,
+	SOUTH_EAST,
+	SOUTH,
+	SOUTH_WEST,
+	WEST,
+	NORTH_WEST
+}
+
 /// <summary>
 /// Parent entity class which all characters inherit from
 /// </summary>
@@ -37,9 +49,11 @@ public abstract class Entity : MonoBehaviour
 	public EntityType entityType;
 
 	[Header("- Entity Stats -")]
-	public int entityHitPoints = 10;
-	public int entityMaxHitPoints = 10;
+	public int entityHitPoints = 5;
+	public int entityMaxHitPoints = 5;
+	public float entityMaxSpeed = 5.0f;
 	public float entitySpeed = 5.0f;
+	public float entityJumpStrength = 1.0f;
 
 	[Header("- Entity Toggable Variables -")]
 	public bool entityIsInteractable = false;
@@ -47,14 +61,21 @@ public abstract class Entity : MonoBehaviour
 	public bool isDead = false;
 
 	[Header("- Entity Object Variables -")]
-	public GameObject entityPrefab;
+	//public GameObject entityPrefab;
 	public Ability[] entityAbilities;
 	public DropsDictionary[] entityDrops;
+	public Direction entityFacingAnimation = Direction.EAST;
+	public bool entityIsOnGround;
 
 	void Start()
 	{
 		gameObject.name = entityName + $" ({(isPlayer ? "PLAYER" : "ENTITY")})";
 		gameObject.tag =  isPlayer ? "PLAYER" : "ENTITY";
+	}
+
+	void Update()
+	{
+		foreach(var item in entityAbilities.Where(x=>x.isActive)) item.Update();
 	}
 
 	/// <summary>
@@ -89,6 +110,11 @@ public abstract class Entity : MonoBehaviour
 	{
 		// Ensure we have the ability to use it
 		if(!entityAbilities.Contains(ability)) return;
+	}
+
+	public Ability GetAbility(string name)
+	{
+		return entityAbilities.First(x=>x.abilityName == name);
 	}
 
 }

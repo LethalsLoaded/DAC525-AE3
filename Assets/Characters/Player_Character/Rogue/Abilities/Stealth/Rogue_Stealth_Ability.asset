@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97c8b5279fcfa446b017538e90297c4, type: 3}
+  m_Name: Rogue_Stealth_Ability
+  m_EditorClassIdentifier: 
+  abilityName: Stealth
+  abilityDescription: Slow down and hide in the shadows allowing you to become invisible
+    to the naked eye of an enemy.
+  abilityInstructions: Swipe down when you are out of combat to toggle.
+  cooldownPeriod: 0
+  abilityValue: 40
+  isActive: 0
+  abilityPrefab: {fileID: 0}
+  abilityOwner: {fileID: 0}
+  abilityAnimation: {fileID: 0}
+  movementPenaltyPercentage: 40
+  maxDistanceToEnemy: 1
