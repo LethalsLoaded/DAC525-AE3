@@ -113,8 +113,7 @@ public abstract class Entity : MonoBehaviour
 	}
 
 	public Ability GetAbility(string name)
-	{
-		return entityAbilities.First(x=>x.abilityName == name);
-	}
+		=> entityAbilities.First(x=>x.abilityName == name);
+	
 
 }

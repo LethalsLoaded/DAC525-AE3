@@ -9,6 +9,7 @@
  */
 
 
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -28,10 +29,12 @@ public class GameManager : MonoBehaviour
 	public int startingLives = 3; // The lives that player will start with
 	public int maxLives = 3; // The maximum allowed lives as player can collect more throughout the levels
 
-	public GameLevel[] testt;
+	public GameLevel[] playableLevels;
 	#endregion
 
 	#region PUBLIC_VARIABLES_HIDDEN_INSPECTOR
+	[HideInInspector]
+	public uint levelIndex = 0;
 	#endregion
 
 	#region PRIVATE_VARIABLES

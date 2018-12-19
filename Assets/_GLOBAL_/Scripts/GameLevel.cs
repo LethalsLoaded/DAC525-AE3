@@ -8,10 +8,7 @@
  * NAME, DATE OF EDIT, CONTENT EDITED:
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Linq;
 
 [System.Serializable]
 public class GameLevel
@@ -43,4 +40,25 @@ public class GameLevel
 		if (sceneName == "") CreateSceneName();
 		return sceneName;
 	}
+
+	/// <summary>
+	/// Gets the active Game Level
+	/// </summary>
+	/// 
+	/// <returns>Instance of active GameLevel</returns>
+	public static GameLevel GetActiveLevel()
+	{
+        var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+		return GameManager.GetInstance().playableLevels.First
+		(
+			x=>x.GetSceneName().ToLower() == scene.name.ToLower()
+		);
+	}
+
+	public static void NextLevel()
+	{
+		GameManager.GetInstance().levelIndex++;
+		var nextLevel = GameManager.GetInstance().playableLevels[GameManager.GetInstance().levelIndex];
+        UnityEngine.SceneManagement.SceneManager.LoadScene(nextLevel.GetSceneName());
+    }
 }

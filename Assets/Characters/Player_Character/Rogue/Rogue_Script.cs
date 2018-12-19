@@ -68,8 +68,12 @@ public class Rogue_Script : Entity
     public void Attack()
     {
         if(GetAbility("Stealth").isActive) // AND ENEMY IS X AWAY AND FACING RIGHT WAY
+        {  
             UseAbility(GetAbility("Backstab"));
+            return;
+        }
 
+        UseAbility(GetAbility("Basic"));
         //if(isInTheAir) UseAbility(GetAbility("Dagger Throw"));
     }
 

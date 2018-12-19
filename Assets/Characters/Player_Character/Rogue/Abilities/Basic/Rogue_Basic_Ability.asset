@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d91f6e5976b0240a810db71fc49411, type: 3}
+  m_Name: Rogue_Basic_Ability
+  m_EditorClassIdentifier: 
+  abilityName: 
+  abilityDescription: 
+  abilityInstructions: 
+  cooldownPeriod: 0
+  abilityValue: 0
+  isActive: 0
+  abilityPrefab: {fileID: 0}
+  abilityOwner: {fileID: 0}
+  abilityAnimation: {fileID: 0}

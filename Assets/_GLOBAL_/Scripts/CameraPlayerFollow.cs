@@ -37,18 +37,18 @@ public class CameraPlayerFollow : MonoBehaviour
 	private void Update () 
 	{
 		float step = moveSpeed * Time.deltaTime;
-		var objectToFollowPos= new Vector3(objectToFollow.transform.position.x, objectToFollow.transform.position.y, transform.position.y);
-		float speed = step * Vector2.Distance(transform.position, objectToFollowPos);
-		transform.position = Vector3.MoveTowards(transform.position, objectToFollowPos, speed);
+		var objectToFollowPos= new Vector3(objectToFollow.transform.position.x, objectToFollow.transform.position.y, Camera.main.transform.position.y);
+		float speed = step * Vector2.Distance(Camera.main.transform.position, objectToFollowPos);
+		Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, objectToFollowPos, speed);
 		
 	}
 
 	private void LateUpdate()
 	{
-		transform.position = new Vector3
+		Camera.main.transform.position = new Vector3
 		(
-			Mathf.Clamp(transform.position.x, startPosition.x, maxPosition.x),
-			Mathf.Clamp(transform.position.y, startPosition.y, maxPosition.y),
+			Mathf.Clamp(Camera.main.transform.position.x, startPosition.x, maxPosition.x),
+			Mathf.Clamp(Camera.main.transform.position.y, startPosition.y, maxPosition.y),
 			-10
 		);
 	}
