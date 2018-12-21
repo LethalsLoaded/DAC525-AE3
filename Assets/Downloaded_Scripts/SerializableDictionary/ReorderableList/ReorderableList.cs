@@ -1,16 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
-
+using Object = UnityEngine.Object;
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace RotaryHeart.Lib.SerializableDictionary
 {
-    [System.Serializable]
+    [Serializable]
     public class ReorderableList
     {
 #if UNITY_EDITOR
@@ -28,17 +30,30 @@ namespace RotaryHeart.Lib.SerializableDictionary
         #region -- Delegates --
 
         public delegate void HeaderExpand(bool expand);
+
         public delegate void DrawFooterDelegate(Rect rect);
+
         public delegate void ActionDelegate(ReorderableList list);
+
         public delegate bool ActionBoolDelegate(ReorderableList list);
+
         public delegate void DrawHeaderDelegate(Rect rect, GUIContent label);
+
         public delegate void ReorderElementesDelegate(int startIndex, int newIndex);
+
         public delegate void AddDropdownDelegate(Rect buttonRect, ReorderableList list);
+
         public delegate void DragDropAppendDelegate(Object reference, ReorderableList list);
-        public delegate void DrawElementDelegate(Rect rect, SerializedProperty element, GUIContent label, int index, bool selected, bool focused);
+
+        public delegate void DrawElementDelegate(Rect rect, SerializedProperty element, GUIContent label, int index,
+            bool selected, bool focused);
+
         public delegate Object DragDropReferenceDelegate(Object[] references, ReorderableList list);
+
         public delegate float GetElementHeightDelegate(SerializedProperty element, int index);
+
         public delegate float GetElementsHeightDelegate(ReorderableList list);
+
         public delegate string GetElementNameDelegate(SerializedProperty element);
 
         #endregion
@@ -87,12 +102,13 @@ namespace RotaryHeart.Lib.SerializableDictionary
         #region -- Private --
 
         #region -- Constant --
+
         private const float ELEMENT_EDGE_TOP = 1;
         private const float ELEMENT_EDGE_BOT = 3;
         private const float ELEMENT_HEIGHT_OFFSET = ELEMENT_EDGE_TOP + ELEMENT_EDGE_BOT;
 
-        private static int selectionHash = "ReorderableListSelection".GetHashCode();
-        private static int dragAndDropHash = "ReorderableListDragAndDrop".GetHashCode();
+        private static readonly int selectionHash = "ReorderableListSelection".GetHashCode();
+        private static readonly int dragAndDropHash = "ReorderableListDragAndDrop".GetHashCode();
 
         #endregion
 
@@ -101,20 +117,13 @@ namespace RotaryHeart.Lib.SerializableDictionary
         private SerializedProperty list;
         private int controlID = -1;
         private Rect[] elementRects;
-        private GUIContent elementLabel;
+        private readonly GUIContent elementLabel;
         private ListSelection selection;
-        private SlideGroup slideGroup;
+        private readonly SlideGroup slideGroup;
         private int pressIndex;
 
-        private float elementSpacing
-        {
-            get
-            {
-                return Mathf.Max(0, verticalSpacing - 2);
-            }
-        }
+        private float elementSpacing => Mathf.Max(0, verticalSpacing - 2);
 
-        private bool dragging;
         private float pressPosition;
         private float dragPosition;
         private int dragDirection;
@@ -125,14 +134,19 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
         //Indicates if the pages system will be used
         private bool enablePages;
+
         //Indicates how much elements per page are going to be used
         private int perPageCount;
+
         //Current page that is being viewed
-        private int currentPage = 0;
+        private int currentPage;
+
         //How many pages are going to be used
         private int pagesCount = 1;
+
         //Current pages that are being displayed
-        private int showPage = 0;
+        private int showPage;
+
         #endregion
 
         #endregion
@@ -140,38 +154,39 @@ namespace RotaryHeart.Lib.SerializableDictionary
         #region -- Constructors --
 
         public ReorderableList(SerializedProperty keys)
-            : this(keys, true, true, true) { }
+            : this(keys, true, true, true)
+        {
+        }
 
         public ReorderableList(SerializedProperty list, bool canAdd, bool canRemove, bool draggable)
-            : this(list, canAdd, canRemove, draggable, ElementDisplayType.Auto, null, null, null) { }
-
-        public ReorderableList(SerializedProperty list, bool canAdd, bool canRemove, bool draggable, ElementDisplayType elementDisplayType, string elementNameProperty, Texture elementIcon)
-            : this(list, canAdd, canRemove, draggable, elementDisplayType, elementNameProperty, null, elementIcon) { }
-
-        public ReorderableList(SerializedProperty list, bool canAdd, bool canRemove, bool draggable, ElementDisplayType elementDisplayType, string elementNameProperty, string elementNameOverride, Texture elementIcon)
+            : this(list, canAdd, canRemove, draggable, ElementDisplayType.Auto, null, null, null)
         {
-            if (list == null)
+        }
+
+        public ReorderableList(SerializedProperty list, bool canAdd, bool canRemove, bool draggable,
+            ElementDisplayType elementDisplayType, string elementNameProperty, Texture elementIcon)
+            : this(list, canAdd, canRemove, draggable, elementDisplayType, elementNameProperty, null, elementIcon)
+        {
+        }
+
+        public ReorderableList(SerializedProperty list, bool canAdd, bool canRemove, bool draggable,
+            ElementDisplayType elementDisplayType, string elementNameProperty, string elementNameOverride,
+            Texture elementIcon)
+        {
+            if (list == null) throw new MissingListExeption();
+
+            if (!list.isArray)
             {
-                throw new MissingListExeption();
+                //Check if user passed in a ReorderableArray, if so, that becomes the list object
+                var array = list.FindPropertyRelative("array");
+
+                if (array == null || !array.isArray) throw new InvalidListException();
+
+                this.list = array;
             }
             else
             {
-                if (!list.isArray)
-                {
-                    //Check if user passed in a ReorderableArray, if so, that becomes the list object
-                    SerializedProperty array = list.FindPropertyRelative("array");
-
-                    if (array == null || !array.isArray)
-                    {
-                        throw new InvalidListException();
-                    }
-
-                    this.list = array;
-                }
-                else
-                {
-                    this.list = list;
-                }
+                this.list = list;
             }
 
             this.canAdd = canAdd;
@@ -229,10 +244,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
             }
         }
 
-        public int Length
-        {
-            get { return HasList ? list.arraySize : 0; }
-        }
+        public int Length => HasList ? list.arraySize : 0;
 
         public int[] Selected
         {
@@ -246,17 +258,14 @@ namespace RotaryHeart.Lib.SerializableDictionary
             set { selection.Select(value); }
         }
 
-        public bool IsDragging
-        {
-            get { return dragging; }
-        }
+        public bool IsDragging { get; private set; }
 
         #endregion
 
         #region -- PUBLIC --
 
         /// <summary>
-        /// Called to draw the list
+        ///     Called to draw the list
         /// </summary>
         /// <param name="rect">Position to use for the list</param>
         /// <param name="label">List name</param>
@@ -264,10 +273,10 @@ namespace RotaryHeart.Lib.SerializableDictionary
         /// <param name="perPageCount">How many elements per page will be drawn</param>
         public void DoList(Rect rect, GUIContent label, bool enablePages, int perPageCount)
         {
-            int indent = EditorGUI.indentLevel;
+            var indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            Rect headerRect = rect;
+            var headerRect = rect;
             headerRect.height = headerHeight;
 
             if (!HasList)
@@ -293,32 +302,30 @@ namespace RotaryHeart.Lib.SerializableDictionary
                         headerRect.y -= 7;
                     }
 
-                    Rect elementBackgroundRect = rect;
+                    var elementBackgroundRect = rect;
                     elementBackgroundRect.yMin = headerRect.yMax;
                     elementBackgroundRect.yMax = rect.yMax - footerHeight;
 
-                    Event evt = Event.current;
+                    var evt = Event.current;
 
                     if (list.arraySize > 0)
                     {
                         //Update element rects if not dragging. Dragging caches draw rects so no need to update
-                        if (!dragging)
-                        {
-                            UpdateElementRects(elementBackgroundRect, evt);
-                        }
+                        if (!IsDragging) UpdateElementRects(elementBackgroundRect, evt);
 
                         if (elementRects.Length > 0)
                         {
-                            int lastElementRect = elementRects.Length;
+                            var lastElementRect = elementRects.Length;
 
                             if (enablePages)
                             {
                                 lastElementRect = Mathf.Min(lastElementRect, perPageCount);
 
-                                lastElementRect = Mathf.Clamp(perPageCount + currentPage * perPageCount, 0, elementRects.Length);
+                                lastElementRect = Mathf.Clamp(perPageCount + currentPage * perPageCount, 0,
+                                    elementRects.Length);
                             }
 
-                            Rect selectableRect = elementBackgroundRect;
+                            var selectableRect = elementBackgroundRect;
                             selectableRect.yMin = elementRects[0].yMin;
                             selectableRect.yMax = elementRects[lastElementRect - 1].yMax;
 
@@ -329,17 +336,15 @@ namespace RotaryHeart.Lib.SerializableDictionary
                     }
                     else
                     {
-                        DrawEmpty(elementBackgroundRect, "Dictionary is Empty", Style.boxBackground, Style.verticalLabel);
+                        DrawEmpty(elementBackgroundRect, "Dictionary is Empty", Style.boxBackground,
+                            Style.verticalLabel);
                     }
 
-                    Rect footerRect = rect;
+                    var footerRect = rect;
                     footerRect.yMin = elementBackgroundRect.yMax;
                     footerRect.xMin = rect.xMax - 58;
 
-                    if (enablePages)
-                    {
-                        DrawPages(new Rect(rect.x, footerRect.yMin, 0, 15));
-                    }
+                    if (enablePages) DrawPages(new Rect(rect.x, footerRect.yMin, 0, 15));
 
                     DrawFooter(footerRect);
                 }
@@ -355,35 +360,25 @@ namespace RotaryHeart.Lib.SerializableDictionary
         private float GetElementHeight(SerializedProperty element, int index)
         {
             if (getElementHeightCallback != null)
-            {
                 return getElementHeightCallback(element, index) + ELEMENT_HEIGHT_OFFSET;
-            }
-            else
-            {
-                return EditorGUI.GetPropertyHeight(element, GetElementLabel(element), IsElementExpandable(element)) + ELEMENT_HEIGHT_OFFSET;
-            }
+            return EditorGUI.GetPropertyHeight(element, GetElementLabel(element), IsElementExpandable(element)) +
+                   ELEMENT_HEIGHT_OFFSET;
         }
 
         private Rect GetElementDrawRect(int index, Rect desiredRect)
         {
             if (slideEasing <= 0)
-            {
                 return desiredRect;
-            }
-            else
-            {
-                //lerp the drag easing toward slide easing, this creates a stronger easing at the start then slower at the end
-                //when dealing with large lists, we can
-
-                return dragging ? slideGroup.GetRect(dragList[index].startIndex, desiredRect, slideEasing) : slideGroup.SetRect(index, desiredRect);
-            }
+            return IsDragging
+                ? slideGroup.GetRect(dragList[index].startIndex, desiredRect, slideEasing)
+                : slideGroup.SetRect(index, desiredRect);
         }
 
         private Rect GetElementRenderRect(SerializedProperty element, Rect elementRect)
         {
             float offset = draggable ? 20 : 5;
 
-            Rect rect = elementRect;
+            var rect = elementRect;
             rect.xMin += IsElementExpandable(element) ? offset + 10 : offset;
             rect.xMax -= 5;
             rect.yMin += ELEMENT_EDGE_TOP;
@@ -395,13 +390,11 @@ namespace RotaryHeart.Lib.SerializableDictionary
         private void DrawHeader(Rect rect, GUIContent label)
         {
             if (showDefaultBackground && Event.current.type == EventType.Repaint)
-            {
                 Style.headerBackground.Draw(rect, false, false, false, false);
-            }
 
             HandleDragAndDrop(rect, Event.current);
 
-            Rect titleRect = rect;
+            var titleRect = rect;
             titleRect.xMin += 6f;
             titleRect.xMax -= 55f;
             titleRect.height -= 2f;
@@ -419,12 +412,9 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
                 EditorGUI.BeginChangeCheck();
 
-                bool isExpanded = EditorGUI.Foldout(titleRect, this.isExpanded, label, true);
+                var isExpanded = EditorGUI.Foldout(titleRect, this.isExpanded, label, true);
 
-                if (EditorGUI.EndChangeCheck())
-                {
-                    this.isExpanded = isExpanded;
-                }
+                if (EditorGUI.EndChangeCheck()) this.isExpanded = isExpanded;
             }
             else
             {
@@ -435,23 +425,17 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             if (elementDisplayType != ElementDisplayType.SingleLine)
             {
-                Rect bRect1 = rect;
+                var bRect1 = rect;
                 bRect1.xMin = rect.xMax - 25;
                 bRect1.xMax = rect.xMax - 5;
 
-                if (GUI.Button(bRect1, Style.expandButton, Style.preButton))
-                {
-                    ExpandElements(true);
-                }
+                if (GUI.Button(bRect1, Style.expandButton, Style.preButton)) ExpandElements(true);
 
-                Rect bRect2 = rect;
+                var bRect2 = rect;
                 bRect2.xMin = bRect1.xMin - 20;
                 bRect2.xMax = bRect1.xMin;
 
-                if (GUI.Button(bRect2, Style.collapseButton, Style.preButton))
-                {
-                    ExpandElements(false);
-                }
+                if (GUI.Button(bRect2, Style.collapseButton, Style.preButton)) ExpandElements(false);
             }
         }
 
@@ -463,24 +447,16 @@ namespace RotaryHeart.Lib.SerializableDictionary
             }
             else
             {
-                if (!isExpanded && expand)
-                {
-                    isExpanded = true;
-                }
+                if (!isExpanded && expand) isExpanded = true;
 
-                for (int i = 0; i < list.arraySize; i++)
-                {
-                    list.GetArrayElementAtIndex(i).isExpanded = expand;
-                }
+                for (var i = 0; i < list.arraySize; i++) list.GetArrayElementAtIndex(i).isExpanded = expand;
             }
         }
 
         private void DrawEmpty(Rect rect, string label, GUIStyle backgroundStyle, GUIStyle labelStyle)
         {
             if (showDefaultBackground && Event.current.type == EventType.Repaint)
-            {
                 backgroundStyle.Draw(rect, false, false, false, false);
-            }
 
             EditorGUI.LabelField(rect, label, labelStyle);
         }
@@ -490,18 +466,13 @@ namespace RotaryHeart.Lib.SerializableDictionary
             //Resize array if elements changed
             int i, len = list.arraySize;
 
-            if (len != elementRects.Length)
-            {
-                System.Array.Resize(ref elementRects, len);
-            }
+            if (len != elementRects.Length) Array.Resize(ref elementRects, len);
 
             if (enablePages)
             {
                 if (evt.type == EventType.Repaint)
-                {
                     for (i = 0; i < len; i++)
                         elementRects[i] = Rect.zero;
-                }
 
                 len = Mathf.Min(len, perPageCount);
             }
@@ -509,19 +480,19 @@ namespace RotaryHeart.Lib.SerializableDictionary
             if (evt.type == EventType.Repaint)
             {
                 //start rect
-                Rect elementRect = rect;
+                var elementRect = rect;
                 elementRect.yMin = elementRect.yMax = rect.yMin + 2;
 
-                float spacing = elementSpacing;
+                var spacing = elementSpacing;
 
                 for (i = 0; i < len; i++)
                 {
-                    int index = i + currentPage * perPageCount;
+                    var index = i + currentPage * perPageCount;
 
                     if (index >= list.arraySize)
                         break;
 
-                    SerializedProperty element = list.GetArrayElementAtIndex(index);
+                    var element = list.GetArrayElementAtIndex(index);
                     //update the elementRects value for this object. Grab the last elementRect for startPosition
 
                     elementRect.y = elementRect.yMax;
@@ -537,42 +508,38 @@ namespace RotaryHeart.Lib.SerializableDictionary
         {
             //draw list background
             if (showDefaultBackground && evt.type == EventType.Repaint)
-            {
                 Style.boxBackground.Draw(rect, false, false, false, false);
-            }
 
             //if not dragging, draw elements as usual
-            if (!dragging)
+            if (!IsDragging)
             {
                 int i, len = list.arraySize;
 
-                if (enablePages)
-                {
-                    len = Mathf.Min(len, perPageCount);
-                }
+                if (enablePages) len = Mathf.Min(len, perPageCount);
 
                 for (i = 0; i < len; i++)
                 {
-                    int index = i + currentPage * perPageCount;
+                    var index = i + currentPage * perPageCount;
 
                     if (index >= list.arraySize)
                         break;
 
-                    bool selected = selection.Contains(index);
+                    var selected = selection.Contains(index);
 
-                    DrawElement(list.GetArrayElementAtIndex(index), GetElementDrawRect(index, elementRects[index]), index, selected, selected && GUIUtility.keyboardControl == controlID);
+                    DrawElement(list.GetArrayElementAtIndex(index), GetElementDrawRect(index, elementRects[index]),
+                        index, selected, selected && GUIUtility.keyboardControl == controlID);
                 }
             }
             else if (evt.type == EventType.Repaint)
             {
                 //draw dragging elements only when repainting
                 int i, s, len = dragList.Length;
-                int sLen = selection.Length;
+                var sLen = selection.Length;
 
                 //first, find the rects of the selected elements, we need to use them for overlap queries
                 for (i = 0; i < sLen; i++)
                 {
-                    DragElement element = dragList[i];
+                    var element = dragList[i];
 
                     //update the element desiredRect if selected. Selected elements appear first in the dragList, so other elements later in iteration will have rects to compare
                     element.desiredRect.y = dragPosition - element.dragOffset;
@@ -584,7 +551,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
                 while (--i > -1)
                 {
-                    DragElement element = dragList[i];
+                    var element = dragList[i];
 
                     if (element.property == null)
                         continue;
@@ -599,19 +566,19 @@ namespace RotaryHeart.Lib.SerializableDictionary
                     //loop over selection and see what overlaps
                     //if dragging down we start from the bottom of the selection
                     //otherwise we start from the top. This helps to cover multiple selected objects
-                    Rect elementRect = element.rect;
+                    var elementRect = element.rect;
 
                     if (elementRect.Equals(Rect.zero))
                         continue;
 
-                    int elementIndex = element.startIndex;
+                    var elementIndex = element.startIndex;
 
-                    int start = dragDirection > 0 ? sLen - 1 : 0;
-                    int end = dragDirection > 0 ? -1 : sLen;
+                    var start = dragDirection > 0 ? sLen - 1 : 0;
+                    var end = dragDirection > 0 ? -1 : sLen;
 
                     for (s = start; s != end; s -= dragDirection)
                     {
-                        DragElement selected = dragList[s];
+                        var selected = dragList[s];
 
                         if (selected.Overlaps(elementRect, elementIndex, dragDirection))
                         {
@@ -632,40 +599,31 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
         private void DrawElement(SerializedProperty element, Rect rect, int index, bool selected, bool focused)
         {
-            Event evt = Event.current;
+            var evt = Event.current;
 
             if (drawElementBackgroundCallback != null)
-            {
                 drawElementBackgroundCallback(rect, element, null, index, selected, focused);
-            }
             else if (evt.type == EventType.Repaint)
-            {
                 if (selected)
                 {
-                    Color color = GUI.color;
+                    var color = GUI.color;
                     GUI.color = Style.selectedColor;
                     Style.selectedStyle.Draw(rect, false, false, false, false);
                     GUI.color = color;
                 }
-            }
 
             if (evt.type == EventType.Repaint && draggable)
-            {
-                Style.draggingHandle.Draw(new Rect(rect.x + 5, rect.y + 6, 10, rect.height - (rect.height - 6)), false, false, false, false);
-            }
+                Style.draggingHandle.Draw(new Rect(rect.x + 5, rect.y + 6, 10, rect.height - (rect.height - 6)), false,
+                    false, false, false);
 
-            GUIContent label = GetElementLabel(element);
+            var label = GetElementLabel(element);
 
-            Rect renderRect = GetElementRenderRect(element, rect);
+            var renderRect = GetElementRenderRect(element, rect);
 
             if (drawElementCallback != null)
-            {
                 drawElementCallback(renderRect, element, label, index, selected, focused);
-            }
             else
-            {
                 EditorGUI.PropertyField(renderRect, element, label, true);
-            }
         }
 
         private GUIContent GetElementLabel(SerializedProperty element)
@@ -673,13 +631,9 @@ namespace RotaryHeart.Lib.SerializableDictionary
             string name;
 
             if (getElementNameCallback != null)
-            {
                 name = getElementNameCallback(element);
-            }
             else
-            {
                 name = GetElementName(element, elementNameProperty, elementNameOverride);
-            }
 
             elementLabel.text = !string.IsNullOrEmpty(name) ? name : element.displayName;
             elementLabel.tooltip = element.tooltip;
@@ -692,27 +646,24 @@ namespace RotaryHeart.Lib.SerializableDictionary
         {
             if (!string.IsNullOrEmpty(nameOverride))
             {
-                string path = element.propertyPath;
+                var path = element.propertyPath;
 
                 if (path.EndsWith("]"))
                 {
-                    int startIndex = path.LastIndexOf('[') + 1;
+                    var startIndex = path.LastIndexOf('[') + 1;
 
                     return string.Concat(nameOverride, " ", path.Substring(startIndex, path.Length - startIndex - 1));
                 }
 
                 return nameOverride;
             }
-            else if (string.IsNullOrEmpty(nameProperty))
-            {
-                return null;
-            }
-            else if (element.propertyType == SerializedPropertyType.ObjectReference && nameProperty == "name")
-            {
-                return element.objectReferenceValue ? element.objectReferenceValue.name : null;
-            }
 
-            SerializedProperty prop = element.FindPropertyRelative(nameProperty);
+            if (string.IsNullOrEmpty(nameProperty))
+                return null;
+            if (element.propertyType == SerializedPropertyType.ObjectReference && nameProperty == "name")
+                return element.objectReferenceValue ? element.objectReferenceValue.name : null;
+
+            var prop = element.FindPropertyRelative(nameProperty);
 
             if (prop != null)
             {
@@ -753,53 +704,42 @@ namespace RotaryHeart.Lib.SerializableDictionary
         private static string GetLayerMaskName(int mask)
         {
             if (mask == 0)
-            {
                 return "Nothing";
-            }
-            else if (mask < 0)
-            {
-                return "Everything";
-            }
+            if (mask < 0) return "Everything";
 
-            string name = string.Empty;
-            int n = 0;
+            var name = string.Empty;
+            var n = 0;
 
-            for (int i = 0; i < 32; i++)
-            {
+            for (var i = 0; i < 32; i++)
                 if (((1 << i) & mask) != 0)
                 {
-                    if (n == 4)
-                    {
-                        return "Mixed ...";
-                    }
+                    if (n == 4) return "Mixed ...";
 
                     name += (n > 0 ? ", " : string.Empty) + LayerMask.LayerToName(i);
                     n++;
                 }
-            }
 
             return name;
         }
 
         private void DrawPages(Rect rect, bool isHeader = false)
         {
-            Rect labelRect = new Rect(rect.x, rect.y - 3, 40, 15);
+            var labelRect = new Rect(rect.x, rect.y - 3, 40, 15);
 
             if (Event.current.type == EventType.Repaint)
-            {
-                Style.footerBackground.Draw(new Rect(labelRect.xMin - 1, rect.y, isHeader ? rect.width + 1 : 185, 15), false, false, false, false);
-            }
+                Style.footerBackground.Draw(new Rect(labelRect.xMin - 1, rect.y, isHeader ? rect.width + 1 : 185, 15),
+                    false, false, false, false);
 
-            pagesCount = Mathf.CeilToInt((float)list.arraySize / (float)perPageCount);
+            pagesCount = Mathf.CeilToInt(list.arraySize / (float) perPageCount);
 
-            GUI.Label(labelRect, (currentPage + 1) + "/" + pagesCount, Style.preButton);
+            GUI.Label(labelRect, currentPage + 1 + "/" + pagesCount, Style.preButton);
 
-            Rect moveBack = new Rect(labelRect.xMax, labelRect.yMin, 20, 15);
-            Rect page1Rect = new Rect(moveBack.xMax, labelRect.yMin, 25, 15);
-            Rect page2Rect = new Rect(page1Rect.xMax, labelRect.yMin, 25, 15);
-            Rect page3Rect = new Rect(page2Rect.xMax, labelRect.yMin, 25, 15);
-            Rect page4Rect = new Rect(page3Rect.xMax, labelRect.yMin, 25, 15);
-            Rect moveNext = new Rect(page4Rect.xMax, labelRect.yMin, 20, 15);
+            var moveBack = new Rect(labelRect.xMax, labelRect.yMin, 20, 15);
+            var page1Rect = new Rect(moveBack.xMax, labelRect.yMin, 25, 15);
+            var page2Rect = new Rect(page1Rect.xMax, labelRect.yMin, 25, 15);
+            var page3Rect = new Rect(page2Rect.xMax, labelRect.yMin, 25, 15);
+            var page4Rect = new Rect(page3Rect.xMax, labelRect.yMin, 25, 15);
+            var moveNext = new Rect(page4Rect.xMax, labelRect.yMin, 20, 15);
 
             if (GUI.Button(moveBack, char.ConvertFromUtf32(0x2190), Style.preButton))
             {
@@ -809,23 +749,19 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             GUI.enabled = currentPage != showPage;
             if (pagesCount > 0)
-            {
                 if (GUI.Button(page1Rect, (showPage + 1).ToString(), Style.preButton))
                 {
                     currentPage = showPage;
                     selection.Clear();
                 }
-            }
+
             GUI.enabled = true;
 
             GUI.enabled = currentPage != showPage + 1;
-            bool drawButton = false;
+            var drawButton = false;
             if (showPage > 3)
             {
-                if (pagesCount > showPage + 1)
-                {
-                    drawButton = true;
-                }
+                if (pagesCount > showPage + 1) drawButton = true;
             }
             else if (pagesCount > 1)
             {
@@ -833,23 +769,19 @@ namespace RotaryHeart.Lib.SerializableDictionary
             }
 
             if (drawButton)
-            {
                 if (GUI.Button(page2Rect, (showPage + 2).ToString(), Style.preButton))
                 {
                     currentPage = showPage + 1;
                     selection.Clear();
                 }
-            }
+
             GUI.enabled = true;
 
             GUI.enabled = currentPage != showPage + 2;
             drawButton = false;
             if (showPage > 3)
             {
-                if (pagesCount > showPage + 2)
-                {
-                    drawButton = true;
-                }
+                if (pagesCount > showPage + 2) drawButton = true;
             }
             else if (pagesCount > 2)
             {
@@ -857,23 +789,19 @@ namespace RotaryHeart.Lib.SerializableDictionary
             }
 
             if (drawButton)
-            {
                 if (GUI.Button(page3Rect, (showPage + 3).ToString(), Style.preButton))
                 {
                     currentPage = showPage + 2;
                     selection.Clear();
                 }
-            }
+
             GUI.enabled = true;
 
             GUI.enabled = currentPage != showPage + 3;
             drawButton = false;
             if (showPage > 4)
             {
-                if (pagesCount > showPage + 3)
-                {
-                    drawButton = true;
-                }
+                if (pagesCount > showPage + 3) drawButton = true;
             }
             else if (pagesCount > 3)
             {
@@ -881,23 +809,20 @@ namespace RotaryHeart.Lib.SerializableDictionary
             }
 
             if (drawButton)
-            {
                 if (GUI.Button(page4Rect, (showPage + 4).ToString(), Style.preButton))
                 {
                     currentPage = showPage + 3;
                     selection.Clear();
                 }
-            }
+
             GUI.enabled = true;
 
             if (GUI.Button(moveNext, char.ConvertFromUtf32(0x2192), Style.preButton))
-            {
                 if (pagesCount > 4)
                 {
                     showPage += 4;
                     showPage = Mathf.Clamp(showPage, 0, pagesCount - 4);
                 }
-            }
         }
 
         private void DrawFooter(Rect rect)
@@ -908,13 +833,10 @@ namespace RotaryHeart.Lib.SerializableDictionary
                 return;
             }
 
-            if (Event.current.type == EventType.Repaint)
-            {
-                Style.footerBackground.Draw(rect, false, false, false, false);
-            }
+            if (Event.current.type == EventType.Repaint) Style.footerBackground.Draw(rect, false, false, false, false);
 
-            Rect addRect = new Rect(rect.xMin + 4f, rect.y - 3f, 25f, 13f);
-            Rect subRect = new Rect(rect.xMax - 29f, rect.y - 3f, 25f, 13f);
+            var addRect = new Rect(rect.xMin + 4f, rect.y - 3f, 25f, 13f);
+            var subRect = new Rect(rect.xMax - 29f, rect.y - 3f, 25f, 13f);
 
             EditorGUI.BeginDisabledGroup(!canAdd);
 
@@ -926,7 +848,8 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             EditorGUI.EndDisabledGroup();
 
-            EditorGUI.BeginDisabledGroup(!CanSelect(selection) || !canRemove || (onCanRemoveCallback != null && !onCanRemoveCallback(this)));
+            EditorGUI.BeginDisabledGroup(!CanSelect(selection) || !canRemove ||
+                                         onCanRemoveCallback != null && !onCanRemoveCallback(this));
 
             if (GUI.Button(subRect, Style.iconToolbarMinus, Style.preButton))
             {
@@ -942,10 +865,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
         private void DispatchChange()
         {
-            if (onChangedCallback != null)
-            {
-                onChangedCallback(this);
-            }
+            if (onChangedCallback != null) onChangedCallback(this);
         }
 
         private void HandleDragAndDrop(Rect rect, Event evt)
@@ -956,15 +876,15 @@ namespace RotaryHeart.Lib.SerializableDictionary
                 case EventType.DragPerform:
                     if (GUI.enabled && rect.Contains(evt.mousePosition))
                     {
-                        Object[] objectReferences = DragAndDrop.objectReferences;
-                        Object[] references = new Object[1];
+                        var objectReferences = DragAndDrop.objectReferences;
+                        var references = new Object[1];
 
-                        bool acceptDrag = false;
+                        var acceptDrag = false;
 
-                        foreach (Object object1 in objectReferences)
+                        foreach (var object1 in objectReferences)
                         {
                             references[0] = object1;
-                            Object object2 = ValidateObjectDragAndDrop(references);
+                            var object2 = ValidateObjectDragAndDrop(references);
 
                             if (object2 != null)
                             {
@@ -973,13 +893,9 @@ namespace RotaryHeart.Lib.SerializableDictionary
                                 if (evt.type == EventType.DragPerform)
                                 {
                                     if (onAppendDragDropCallback != null)
-                                    {
                                         onAppendDragDropCallback(object2, this);
-                                    }
                                     else
-                                    {
                                         AppendDragAndDropValue(object2);
-                                    }
 
                                     acceptDrag = true;
                                     DragAndDrop.activeControlID = 0;
@@ -997,23 +913,18 @@ namespace RotaryHeart.Lib.SerializableDictionary
                             DragAndDrop.AcceptDrag();
                         }
                     }
+
                     break;
 
                 case EventType.DragExited:
-                    if (GUI.enabled)
-                    {
-                        HandleUtility.Repaint();
-                    }
+                    if (GUI.enabled) HandleUtility.Repaint();
                     break;
             }
         }
 
         private Object ValidateObjectDragAndDrop(Object[] references)
         {
-            if (onValidateDragAndDropCallback != null)
-            {
-                return onValidateDragAndDropCallback(references, this);
-            }
+            if (onValidateDragAndDropCallback != null) return onValidateDragAndDropCallback(references, this);
 
             return Internals.ValidateObjectDragAndDrop(references, list);
         }
@@ -1032,7 +943,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
                 if (selection.Length > 0 && UpdateDragPosition(evt.mousePosition, rect, dragList))
                 {
                     GUIUtility.keyboardControl = controlID;
-                    dragging = true;
+                    IsDragging = true;
                 }
 
                 evt.Use();
@@ -1088,16 +999,14 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
                     if (rect.Contains(evt.mousePosition) && IsSelectionButton(evt))
                     {
-                        int index = GetSelectionIndex(evt.mousePosition);
+                        var index = GetSelectionIndex(evt.mousePosition);
 
                         if (CanSelect(index))
-                        {
-                            DoSelection(index, GUIUtility.keyboardControl == 0 || GUIUtility.keyboardControl == controlID || evt.button == 2, evt);
-                        }
+                            DoSelection(index,
+                                GUIUtility.keyboardControl == 0 || GUIUtility.keyboardControl == controlID ||
+                                evt.button == 2, evt);
                         else
-                        {
                             selection.Clear();
-                        }
 
                         HandleUtility.Repaint();
                     }
@@ -1112,18 +1021,15 @@ namespace RotaryHeart.Lib.SerializableDictionary
                         selection.SelectWhenNoAction(pressIndex, evt);
 
                         if (onMouseUpCallback != null && IsPositionWithinElement(evt.mousePosition, selection.Last))
-                        {
                             onMouseUpCallback(this);
-                        }
                     }
                     else if (GUIUtility.hotControl == controlID)
                     {
-
                         evt.Use();
 
-                        if (dragging)
+                        if (IsDragging)
                         {
-                            dragging = false;
+                            IsDragging = false;
 
                             //move elements in list sort the drag list
                             ReorderDraggedElements(dragList);
@@ -1132,10 +1038,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
                             list.serializedObject.ApplyModifiedProperties();
                             list.serializedObject.Update();
 
-                            if (onReorderCallback != null)
-                            {
-                                onReorderCallback(this);
-                            }
+                            if (onReorderCallback != null) onReorderCallback(this);
 
                             DispatchChange();
                         }
@@ -1144,10 +1047,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
                             //if we didn't drag, then select the original pressed object
                             selection.SelectWhenNoAction(pressIndex, evt);
 
-                            if (onMouseUpCallback != null)
-                            {
-                                onMouseUpCallback(this);
-                            }
+                            if (onMouseUpCallback != null) onMouseUpCallback(this);
                         }
 
                         GUIUtility.hotControl = 0;
@@ -1161,12 +1061,12 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
                     if (GUIUtility.keyboardControl == controlID)
                     {
-                        if (evt.keyCode == KeyCode.DownArrow && !dragging)
+                        if (evt.keyCode == KeyCode.DownArrow && !IsDragging)
                         {
                             selection.Select(Mathf.Min(selection.Last + 1, list.arraySize - 1));
                             evt.Use();
                         }
-                        else if (evt.keyCode == KeyCode.UpArrow && !dragging)
+                        else if (evt.keyCode == KeyCode.UpArrow && !IsDragging)
                         {
                             selection.Select(Mathf.Max(selection.Last - 1, 0));
                             evt.Use();
@@ -1175,9 +1075,9 @@ namespace RotaryHeart.Lib.SerializableDictionary
                         {
                             GUIUtility.hotControl = 0;
 
-                            if (dragging)
+                            if (IsDragging)
                             {
-                                dragging = false;
+                                IsDragging = false;
                                 selection = beforeDragSelection;
                             }
 
@@ -1198,22 +1098,15 @@ namespace RotaryHeart.Lib.SerializableDictionary
         {
             //append selections based on action, this may be a additive (ctrl) or range (shift) selection
             if (multipleSelection)
-            {
                 selection.AppendWithAction(pressIndex = index, evt);
-            }
             else
-            {
                 selection.Select(pressIndex = index);
-            }
 
-            if (onSelectCallback != null)
-            {
-                onSelectCallback(this);
-            }
+            if (onSelectCallback != null) onSelectCallback(this);
 
             if (draggable)
             {
-                dragging = false;
+                IsDragging = false;
                 dragPosition = pressPosition = evt.mousePosition.y;
                 dragList = GetDragList(dragPosition);
 
@@ -1222,10 +1115,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
                 GUIUtility.hotControl = controlID;
             }
 
-            if (setKeyboardControl)
-            {
-                GUIUtility.keyboardControl = controlID;
-            }
+            if (setKeyboardControl) GUIUtility.keyboardControl = controlID;
 
             evt.Use();
         }
@@ -1235,13 +1125,8 @@ namespace RotaryHeart.Lib.SerializableDictionary
             int i, len = list.arraySize;
 
             if (dragList == null)
-            {
                 dragList = new DragElement[len];
-            }
-            else if (dragList.Length != len)
-            {
-                System.Array.Resize(ref dragList, len);
-            }
+            else if (dragList.Length != len) Array.Resize(ref dragList, len);
 
             if (enablePages)
             {
@@ -1260,15 +1145,15 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             for (i = 0; i < len; i++)
             {
-                int index = i + currentPage * perPageCount;
+                var index = i + currentPage * perPageCount;
 
                 if (index >= list.arraySize)
                     break;
 
-                SerializedProperty property = list.GetArrayElementAtIndex(index);
-                Rect elementRect = elementRects[index];
+                var property = list.GetArrayElementAtIndex(index);
+                var elementRect = elementRects[index];
 
-                DragElement dragElement = new DragElement()
+                var dragElement = new DragElement
                 {
                     property = property,
                     dragOffset = dragPosition - elementRect.y,
@@ -1283,16 +1168,11 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             //finally, sort the dragList by selection, selected objects appear first in the list
             //selection order is preserved as well
-            System.Array.Sort(dragList, (a, b) =>
+            Array.Sort(dragList, (a, b) =>
             {
                 if (b.selected)
-                {
                     return a.selected ? a.startIndex.CompareTo(b.startIndex) : 1;
-                }
-                else if (a.selected)
-                {
-                    return b.selected ? b.startIndex.CompareTo(a.startIndex) : -1;
-                }
+                if (a.selected) return b.selected ? b.startIndex.CompareTo(a.startIndex) : -1;
 
                 return a.startIndex.CompareTo(b.startIndex);
             });
@@ -1303,17 +1183,17 @@ namespace RotaryHeart.Lib.SerializableDictionary
         private bool UpdateDragPosition(Vector2 position, Rect bounds, DragElement[] dragList)
         {
             //find new drag position
-            int startIndex = 0;
-            int endIndex = selection.Length - 1;
+            var startIndex = 0;
+            var endIndex = selection.Length - 1;
 
-            float minOffset = dragList[startIndex].dragOffset;
-            float maxOffset = dragList[endIndex].rect.height - dragList[endIndex].dragOffset;
+            var minOffset = dragList[startIndex].dragOffset;
+            var maxOffset = dragList[endIndex].rect.height - dragList[endIndex].dragOffset;
 
             dragPosition = Mathf.Clamp(position.y, bounds.yMin + minOffset, bounds.yMax - maxOffset);
 
             if (Mathf.Abs(dragPosition - pressPosition) > 1)
             {
-                dragDirection = (int)Mathf.Sign(dragPosition - pressPosition);
+                dragDirection = (int) Mathf.Sign(dragPosition - pressPosition);
                 return true;
             }
 
@@ -1324,7 +1204,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
         {
             //Save the current expanded states on all elements. I don't see any other way to do this
             //MoveArrayElement does not move the foldout states, so... fun.
-            for (int i = 0; i < dragList.Length; i++)
+            for (var i = 0; i < dragList.Length; i++)
             {
                 if (dragList[i].property == null)
                     continue;
@@ -1333,31 +1213,31 @@ namespace RotaryHeart.Lib.SerializableDictionary
             }
 
             //Sort list based on positions
-            System.Array.Sort(dragList, (a, b) => a.desiredRect.center.y.CompareTo(b.desiredRect.center.y));
+            Array.Sort(dragList, (a, b) => a.desiredRect.center.y.CompareTo(b.desiredRect.center.y));
 
             selection.Sort((a, b) =>
             {
-                int d1 = GetDragIndexFromSelection(a);
-                int d2 = GetDragIndexFromSelection(b);
+                var d1 = GetDragIndexFromSelection(a);
+                var d2 = GetDragIndexFromSelection(b);
 
                 return dragDirection > 0 ? d1.CompareTo(d2) : d2.CompareTo(d1);
             });
 
             //Swap the selected elements in the List
-            int s = selection.Length;
+            var s = selection.Length;
 
             while (--s > -1)
             {
-                int newIndex = GetDragIndexFromSelection(selection[s]);
+                var newIndex = GetDragIndexFromSelection(selection[s]);
 
                 selection[s] = newIndex;
-                int correctIndex = newIndex;
+                var correctIndex = newIndex;
 
                 if (enablePages)
                 {
-                    int tempIndex = -1;
+                    var tempIndex = -1;
 
-                    for (int i = 0; i < dragList.Length; i++)
+                    for (var i = 0; i < dragList.Length; i++)
                     {
                         if (!dragList[i].rect.Equals(Rect.zero))
                             tempIndex++;
@@ -1373,14 +1253,11 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
                 list.MoveArrayElement(dragList[correctIndex].startIndex, newIndex);
 
-                if (onElementsReorder != null)
-                {
-                    onElementsReorder.Invoke(dragList[correctIndex].startIndex, newIndex);
-                }
+                if (onElementsReorder != null) onElementsReorder.Invoke(dragList[correctIndex].startIndex, newIndex);
             }
 
             //Restore expanded states on items
-            for (int i = 0; i < dragList.Length; i++)
+            for (var i = 0; i < dragList.Length; i++)
             {
                 if (dragList[i].property == null)
                     continue;
@@ -1393,49 +1270,39 @@ namespace RotaryHeart.Lib.SerializableDictionary
         {
             if (enablePages)
             {
-                int returnIndex = -1;
+                var returnIndex = -1;
 
-                for (int i = 0; i < dragList.Length; i++)
+                for (var i = 0; i < dragList.Length; i++)
                 {
                     if (!dragList[i].rect.Equals(Rect.zero))
                         returnIndex++;
 
-                    if (dragList[i].startIndex == index)
-                    {
-                        return returnIndex;
-                    }
+                    if (dragList[i].startIndex == index) return returnIndex;
                 }
 
                 return index;
             }
-            else
-            {
-                return System.Array.FindIndex(dragList, t => t.startIndex == index && !t.rect.Equals(Rect.zero));
-            }
+
+            return Array.FindIndex(dragList, t => t.startIndex == index && !t.rect.Equals(Rect.zero));
         }
 
         private int GetSelectionIndex(Vector2 position)
         {
             int i, len = elementRects.Length;
 
-            if (enablePages)
-            {
-                len = Mathf.Min(len, perPageCount);
-            }
+            if (enablePages) len = Mathf.Min(len, perPageCount);
 
             for (i = 0; i < len; i++)
             {
-                int index = i + currentPage * perPageCount;
+                var index = i + currentPage * perPageCount;
 
                 if (index >= elementRects.Length)
                     break;
 
-                Rect rect = elementRects[index];
+                var rect = elementRects[index];
 
-                if (rect.Contains(position) || (index == 0 && position.y <= rect.yMin) || (index == len - 1 && position.y >= rect.yMax))
-                {
-                    return index;
-                }
+                if (rect.Contains(position) || index == 0 && position.y <= rect.yMin ||
+                    index == len - 1 && position.y >= rect.yMax) return index;
             }
 
             return -1;
@@ -1489,22 +1356,22 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
         #region -- LIST STYLE --
 
-        static class Style
+        private static class Style
         {
-            public static GUIContent iconToolbarPlus;
+            public static readonly GUIContent iconToolbarPlus;
             public static GUIContent iconToolbarPlusMore;
-            public static GUIContent iconToolbarMinus;
-            public static GUIStyle draggingHandle;
-            public static GUIStyle headerBackground;
-            public static GUIStyle footerBackground;
-            public static GUIStyle boxBackground;
-            public static GUIStyle preButton;
+            public static readonly GUIContent iconToolbarMinus;
+            public static readonly GUIStyle draggingHandle;
+            public static readonly GUIStyle headerBackground;
+            public static readonly GUIStyle footerBackground;
+            public static readonly GUIStyle boxBackground;
+            public static readonly GUIStyle preButton;
             public static GUIStyle elementBackground;
-            public static GUIStyle verticalLabel;
-            public static GUIStyle selectedStyle;
-            public static GUIContent expandButton;
-            public static GUIContent collapseButton;
-            public static Color selectedColor;
+            public static readonly GUIStyle verticalLabel;
+            public static readonly GUIStyle selectedStyle;
+            public static readonly GUIContent expandButton;
+            public static readonly GUIContent collapseButton;
+            public static readonly Color selectedColor;
 
 
             static Style()
@@ -1532,7 +1399,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
                 preButton.normal.textColor = verticalLabel.normal.textColor;
                 selectedStyle = new GUIStyle
                 {
-                    normal = new GUIStyleState { background = Texture2D.whiteTexture }
+                    normal = new GUIStyleState {background = Texture2D.whiteTexture}
                 };
                 expandButton = EditorGUIUtility.IconContent("winbtn_win_max");
                 collapseButton = EditorGUIUtility.IconContent("winbtn_win_min");
@@ -1544,7 +1411,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
         #region -- DRAG ELEMENT --
 
-        struct DragElement
+        private struct DragElement
         {
             internal SerializedProperty property;
             internal int startIndex;
@@ -1559,13 +1426,8 @@ namespace RotaryHeart.Lib.SerializableDictionary
             internal bool Overlaps(Rect value, int index, int direction)
             {
                 if (direction < 0 && index < startIndex)
-                {
                     return desiredRect.yMin < value.center.y;
-                }
-                else if (direction > 0 && index > startIndex)
-                {
-                    return desiredRect.yMax > value.center.y;
-                }
+                if (direction > 0 && index > startIndex) return desiredRect.yMax > value.center.y;
 
                 return false;
             }
@@ -1575,31 +1437,30 @@ namespace RotaryHeart.Lib.SerializableDictionary
                 states = new Dictionary<int, bool>();
                 isExpanded = property.isExpanded;
 
-                Iterate(this, property, (DragElement e, SerializedProperty p, int index) => { e.states[index] = p.isExpanded; });
+                Iterate(this, property, (e, p, index) => { e.states[index] = p.isExpanded; });
             }
 
             internal void RestoreState(SerializedProperty property)
             {
                 property.isExpanded = isExpanded;
 
-                Iterate(this, property, (DragElement e, SerializedProperty p, int index) => { p.isExpanded = e.states[index]; });
+                Iterate(this, property, (e, p, index) => { p.isExpanded = e.states[index]; });
             }
 
-            private static void Iterate(DragElement element, SerializedProperty property, System.Action<DragElement, SerializedProperty, int> action)
+            private static void Iterate(DragElement element, SerializedProperty property,
+                Action<DragElement, SerializedProperty, int> action)
             {
-                SerializedProperty copy = property.Copy();
-                SerializedProperty end = copy.GetEndProperty();
+                var copy = property.Copy();
+                var end = copy.GetEndProperty();
 
-                int index = 0;
+                var index = 0;
 
                 while (copy.NextVisible(true) && !SerializedProperty.EqualContents(copy, end))
-                {
                     if (copy.hasVisibleChildren)
                     {
                         action(element, copy, index);
                         index++;
                     }
-                }
             }
         }
 
@@ -1607,9 +1468,9 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
         #region -- SLIDE GROUP --
 
-        class SlideGroup
+        private class SlideGroup
         {
-            private Dictionary<int, Rect> animIDs;
+            private readonly Dictionary<int, Rect> animIDs;
 
             public SlideGroup()
             {
@@ -1618,53 +1479,39 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             public Rect GetRect(int id, Rect r, float easing)
             {
-                if (Event.current.type != EventType.Repaint)
-                {
-                    return r;
-                }
+                if (Event.current.type != EventType.Repaint) return r;
 
                 if (!animIDs.ContainsKey(id))
                 {
                     animIDs.Add(id, r);
                     return r;
                 }
-                else
+
+                var rect = animIDs[id];
+
+                if (rect.y != r.y)
                 {
-                    Rect rect = animIDs[id];
+                    var delta = r.y - rect.y;
+                    var absDelta = Mathf.Abs(delta);
 
-                    if (rect.y != r.y)
-                    {
-                        float delta = r.y - rect.y;
-                        float absDelta = Mathf.Abs(delta);
+                    //if the distance between current rect and target is too large, then move the element towards the target rect so it reaches the destination faster
+                    if (absDelta > rect.height * 2)
+                        r.y = delta > 0 ? r.y - rect.height : r.y + rect.height;
+                    else if (absDelta > 0.5) r.y = Mathf.Lerp(rect.y, r.y, easing);
 
-                        //if the distance between current rect and target is too large, then move the element towards the target rect so it reaches the destination faster
-                        if (absDelta > (rect.height * 2))
-                        {
-                            r.y = delta > 0 ? r.y - rect.height : r.y + rect.height;
-                        }
-                        else if (absDelta > 0.5)
-                        {
-                            r.y = Mathf.Lerp(rect.y, r.y, easing);
-                        }
-
-                        animIDs[id] = r;
-                        HandleUtility.Repaint();
-                    }
-
-                    return r;
+                    animIDs[id] = r;
+                    HandleUtility.Repaint();
                 }
+
+                return r;
             }
 
             public Rect SetRect(int id, Rect rect)
             {
                 if (animIDs.ContainsKey(id))
-                {
                     animIDs[id] = rect;
-                }
                 else
-                {
                     animIDs.Add(id, rect);
-                }
 
                 return rect;
             }
@@ -1674,11 +1521,10 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
         #region -- SELECTION --
 
-        class ListSelection : IEnumerable<int>
+        private class ListSelection : IEnumerable<int>
         {
-            private List<int> indexes;
-
             internal int? firstSelected;
+            private readonly List<int> indexes;
 
             public ListSelection()
             {
@@ -1690,35 +1536,33 @@ namespace RotaryHeart.Lib.SerializableDictionary
                 this.indexes = new List<int>(indexes);
             }
 
-            public int First
-            {
-                get { return indexes.Count > 0 ? indexes[0] : -1; }
-            }
+            public int First => indexes.Count > 0 ? indexes[0] : -1;
 
-            public int Last
-            {
-                get { return indexes.Count > 0 ? indexes[indexes.Count - 1] : -1; }
-            }
+            public int Last => indexes.Count > 0 ? indexes[indexes.Count - 1] : -1;
 
-            public int Length
-            {
-                get { return indexes.Count; }
-            }
+            public int Length => indexes.Count;
 
             public int this[int index]
             {
                 get { return indexes[index]; }
                 set
                 {
-                    int oldIndex = indexes[index];
+                    var oldIndex = indexes[index];
 
                     indexes[index] = value;
 
-                    if (oldIndex == firstSelected)
-                    {
-                        firstSelected = value;
-                    }
+                    if (oldIndex == firstSelected) firstSelected = value;
                 }
+            }
+
+            public IEnumerator<int> GetEnumerator()
+            {
+                return ((IEnumerable<int>) indexes).GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return ((IEnumerable<int>) indexes).GetEnumerator();
             }
 
             public bool Contains(int index)
@@ -1734,10 +1578,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             public void SelectWhenNoAction(int index, Event evt)
             {
-                if (!EditorGUI.actionKey && !evt.shift)
-                {
-                    Select(index);
-                }
+                if (!EditorGUI.actionKey && !evt.shift) Select(index);
             }
 
             public void Select(int index)
@@ -1750,10 +1591,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             public void Remove(int index)
             {
-                if (indexes.Contains(index))
-                {
-                    indexes.Remove(index);
-                }
+                if (indexes.Contains(index)) indexes.Remove(index);
             }
 
             public void AppendWithAction(int index, Event evt)
@@ -1784,18 +1622,12 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             public void Sort()
             {
-                if (indexes.Count > 0)
-                {
-                    indexes.Sort();
-                }
+                if (indexes.Count > 0) indexes.Sort();
             }
 
-            public void Sort(System.Comparison<int> comparison)
+            public void Sort(Comparison<int> comparison)
             {
-                if (indexes.Count > 0)
-                {
-                    indexes.Sort(comparison);
-                }
+                if (indexes.Count > 0) indexes.Sort(comparison);
             }
 
             public int[] ToArray()
@@ -1805,7 +1637,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             public ListSelection Clone()
             {
-                ListSelection clone = new ListSelection(ToArray());
+                var clone = new ListSelection(ToArray());
                 clone.firstSelected = firstSelected;
 
                 return clone;
@@ -1814,31 +1646,22 @@ namespace RotaryHeart.Lib.SerializableDictionary
             internal bool CanRevert(SerializedProperty list)
             {
                 if (list.serializedObject.targetObjects.Length == 1)
-                {
-                    for (int i = 0; i < Length; i++)
-                    {
+                    for (var i = 0; i < Length; i++)
                         if (list.GetArrayElementAtIndex(this[i]).isInstantiatedPrefab)
-                        {
                             return true;
-                        }
-                    }
-                }
 
                 return false;
             }
 
             internal void RevertValues(object userData)
             {
-                SerializedProperty list = userData as SerializedProperty;
+                var list = userData as SerializedProperty;
 
-                for (int i = 0; i < Length; i++)
+                for (var i = 0; i < Length; i++)
                 {
-                    SerializedProperty property = list.GetArrayElementAtIndex(this[i]);
+                    var property = list.GetArrayElementAtIndex(this[i]);
 
-                    if (property.isInstantiatedPrefab)
-                    {
-                        property.prefabOverride = false;
-                    }
+                    if (property.isInstantiatedPrefab) property.prefabOverride = false;
                 }
 
                 list.serializedObject.ApplyModifiedProperties();
@@ -1849,35 +1672,18 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             private void Append(int index)
             {
-                if (index >= 0 && !indexes.Contains(index))
-                {
-                    indexes.Add(index);
-                }
+                if (index >= 0 && !indexes.Contains(index)) indexes.Add(index);
             }
 
             private void AppendRange(int from, int to)
             {
-                int dir = (int)Mathf.Sign(to - from);
+                var dir = (int) Mathf.Sign(to - from);
 
                 if (dir != 0)
-                {
-                    for (int i = from; i != to; i += dir)
-                    {
+                    for (var i = from; i != to; i += dir)
                         Append(i);
-                    }
-                }
 
                 Append(to);
-            }
-
-            public IEnumerator<int> GetEnumerator()
-            {
-                return ((IEnumerable<int>)indexes).GetEnumerator();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return ((IEnumerable<int>)indexes).GetEnumerator();
             }
         }
 
@@ -1885,31 +1691,37 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
         #region -- EXCEPTIONS --
 
-        class InvalidListException : System.InvalidOperationException
+        private class InvalidListException : InvalidOperationException
         {
-            public InvalidListException() : base("ReorderableList serializedProperty must be an array") { }
+            public InvalidListException() : base("ReorderableList serializedProperty must be an array")
+            {
+            }
         }
 
-        class MissingListExeption : System.ArgumentNullException
+        private class MissingListExeption : ArgumentNullException
         {
-            public MissingListExeption() : base("ReorderableList serializedProperty is null") { }
+            public MissingListExeption() : base("ReorderableList serializedProperty is null")
+            {
+            }
         }
 
         #endregion
 
         #region -- INTERNAL --
 
-        static class Internals
+        private static class Internals
         {
-            private static MethodInfo dragDropValidation;
+            private static readonly MethodInfo dragDropValidation;
             private static object[] dragDropValidationParams;
-            private static MethodInfo appendDragDrop;
+            private static readonly MethodInfo appendDragDrop;
             private static object[] appendDragDropParams;
 
             static Internals()
             {
-                dragDropValidation = System.Type.GetType("UnityEditor.EditorGUI, UnityEditor").GetMethod("ValidateObjectFieldAssignment", BindingFlags.NonPublic | BindingFlags.Static);
-                appendDragDrop = typeof(SerializedProperty).GetMethod("AppendFoldoutPPtrValue", BindingFlags.NonPublic | BindingFlags.Instance);
+                dragDropValidation = Type.GetType("UnityEditor.EditorGUI, UnityEditor")
+                    .GetMethod("ValidateObjectFieldAssignment", BindingFlags.NonPublic | BindingFlags.Static);
+                appendDragDrop = typeof(SerializedProperty).GetMethod("AppendFoldoutPPtrValue",
+                    BindingFlags.NonPublic | BindingFlags.Instance);
             }
 
             internal static Object ValidateObjectDragAndDrop(Object[] references, SerializedProperty property)
@@ -1941,16 +1753,14 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
             private static object[] GetParams(ref object[] parameters, int count)
             {
-                if (parameters == null)
-                {
-                    parameters = new object[count];
-                }
+                if (parameters == null) parameters = new object[count];
 
                 return parameters;
             }
         }
 
         #endregion
+
 #endif
     }
 }

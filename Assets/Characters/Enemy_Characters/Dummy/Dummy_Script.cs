@@ -10,37 +10,34 @@
 
 using UnityEngine;
 
-/// <summary>
-///     Class used to show how an entity can be setup.
-///     Inherits from
-///     <param= Entity>Entity</param>
-/// </summary>
-public class TemplateEnemyEntity : Entity
+public class Dummy_Script : Entity
 {
-    protected override void OnSpawn()
-    {
-        // Do stuff when entity is spawned
-        Debug.Log(GameManager.GetInstance().GetLives());
-    }
-
     protected override void OnDeath(Entity entityKiller = null)
     {
-        // Do stuff when killed (NOT DESTROYED!)
     }
 
     protected override void OnHit(Entity entityDamager)
     {
-        // Do stuff when hit by entityDamager
+        Debug.Log($"I have been hit by {entityDamager.name}!");
+        StartCoroutine(Blink());
+        // TODO: Play animation and crap
     }
 
     protected override void OnInteraction(Entity entityInteracter)
     {
-        // Do stuff when interacted with by entityInteracter
     }
 
-    // Necessary to execute 'OnSpawn()'
+    protected override void OnSpawn()
+    {
+    }
+
+    // Use this for initialization
     private void Start()
     {
-        OnSpawn();
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
     }
 }

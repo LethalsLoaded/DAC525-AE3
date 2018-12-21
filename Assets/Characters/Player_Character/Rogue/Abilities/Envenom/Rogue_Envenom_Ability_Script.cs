@@ -11,9 +11,9 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Rogue_Envenom_Ability", menuName = "Character_Abilities/Rogue/Envenom", order = 3)]
-public class Rogue_Envenom_Ability_Script : Ability {
-
-	public float _secondsUntilDeactivate;
+public class Rogue_Envenom_Ability_Script : Ability
+{
+    public float _secondsUntilDeactivate;
 
     public override void Start()
     {
@@ -22,12 +22,12 @@ public class Rogue_Envenom_Ability_Script : Ability {
 
     public override void Update()
     {
-		if(!this.isActive) return;
+        if (!isActive) return;
     }
 
     public override void Use()
     {
-		this.isActive = true;
-		// start a 15 sec timer
+        isActive = true;
+        // start a 15 sec timer
     }
 }

@@ -9,47 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1185922740059180}
+  m_RootGameObject: {fileID: 1472892487301094}
   m_IsPrefabAsset: 1
---- !u!1 &1185922740059180
+--- !u!1 &1472892487301094
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4624813851886404}
-  - component: {fileID: 212576010268567354}
-  - component: {fileID: 114962669332711650}
-  - component: {fileID: 50371197373528150}
-  - component: {fileID: 61881724578603360}
+  - component: {fileID: 4673735643014182}
+  - component: {fileID: 212555004963490892}
+  - component: {fileID: 50832988990992944}
+  - component: {fileID: 61306709342355804}
+  - component: {fileID: 114997532900224212}
   m_Layer: 0
-  m_Name: Rogue_Character_PREFAB
-  m_TagString: Untagged
+  m_Name: Dummy_Character_PREFAB
+  m_TagString: ENTITY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4624813851886404
+--- !u!4 &4673735643014182
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185922740059180}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.07, y: -7.89, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_GameObject: {fileID: 1472892487301094}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.75, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50371197373528150
+--- !u!50 &50832988990992944
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185922740059180}
+  m_GameObject: {fileID: 1472892487301094}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -62,13 +62,13 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &61881724578603360
+  m_Constraints: 4
+--- !u!61 &61306709342355804
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185922740059180}
+  m_GameObject: {fileID: 1472892487301094}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -88,47 +88,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114962669332711650
+--- !u!114 &114997532900224212
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185922740059180}
+  m_GameObject: {fileID: 1472892487301094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ac32353da8185d408e5511d9a37324c, type: 3}
+  m_Script: {fileID: 11500000, guid: da6d21774e17adb4eaf223731c200e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityName: Rogue
-  entityDescription: A trickster of sorts, one with the shadows, silent as a cat,
-    deadly as a viper, the rogue is a very dangerous adversary when he catches you
-    off-guard. If you survive his initial onslaught, you may live to tell the tale...
-    Sometimes...
+  entityName: Target Dummy
+  entityDescription: Completely Immobile Enemy, it has no hopes against you.
   entityType: 0
-  entityHitPoints: 3
-  entityMaxHitPoints: 3
-  entityMaxSpeed: 5
-  entitySpeed: 5
-  entityJumpStrength: 1000
+  entityHitPoints: 5
+  entityMaxHitPoints: 5
+  entityMaxSpeed: 0
+  entitySpeed: 0
+  entityJumpStrength: 0
   entityIsInteractable: 0
-  isPlayer: 1
+  isPlayer: 0
   isDead: 0
-  entityAbilities:
-  - {fileID: 11400000, guid: 7dbfcbd3a22084941a0ba2ed275b8bca, type: 2}
-  - {fileID: 11400000, guid: f91d10adbe0ef6f4e806b4187e9e3e51, type: 2}
-  - {fileID: 11400000, guid: cca3fe77e12b71e47b42778d22cbb010, type: 2}
-  - {fileID: 11400000, guid: 1bb9234892a3fa64a8170f2abfc5159f, type: 2}
+  entityAbilities: []
   entityDrops: []
   entityFacingDirection: 2
   entityIsOnGround: 0
-  _rayLength: 1
-  inCombat: 0
---- !u!212 &212576010268567354
+--- !u!212 &212555004963490892
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185922740059180}
+  m_GameObject: {fileID: 1472892487301094}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -158,8 +149,8 @@ SpriteRenderer:
   m_SortingLayerID: 778757463
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0b154b91919e10e4780014ea241c4ca6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b1672765107a2574ba9154ef167dd1a5, type: 3}
+  m_Color: {r: 0.23380208, g: 0.6848816, b: 0.6981132, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

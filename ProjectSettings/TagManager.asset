@@ -7,6 +7,7 @@ TagManager:
   - PERS_GAME_MANAGER
   - ENTITY
   - PLAYER
+  - DOOR
   layers:
   - Default
   - TransparentFX

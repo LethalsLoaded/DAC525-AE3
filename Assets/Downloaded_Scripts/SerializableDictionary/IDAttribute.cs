@@ -1,22 +1,19 @@
-﻿namespace RotaryHeart.Lib.SerializableDictionary
+﻿using System;
+
+namespace RotaryHeart.Lib.SerializableDictionary
 {
-    [System.AttributeUsage(System.AttributeTargets.Field)]
-    public class IDAttribute : System.Attribute
+    [AttributeUsage(AttributeTargets.Field)]
+    public class IDAttribute : Attribute
     {
-        private string _id;
-
-        public string Id
-        {
-            get { return _id; }
-        }
-
         /// <summary>
-        /// Serializable field name for the property id
+        ///     Serializable field name for the property id
         /// </summary>
         /// <param name="id">Field name</param>
         public IDAttribute(string id)
         {
-            _id = id;
+            Id = id;
         }
+
+        public string Id { get; }
     }
 }

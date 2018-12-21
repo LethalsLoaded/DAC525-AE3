@@ -1,100 +1,89 @@
 //Based of the following thread https://forum.unity.com/threads/finally-a-serializable-dictionary-for-unity-extracted-from-system-collections-generic.335797/
 
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace RotaryHeart.Lib.SerializableDictionary
 {
     /// <summary>
-    /// This class is only used to be able to draw the custom property drawer
+    ///     This class is only used to be able to draw the custom property drawer
     /// </summary>
     public abstract class DrawableDictionary
     {
-        [UnityEngine.HideInInspector]
-        public ReorderableList reorderableList = null;
-        [UnityEngine.HideInInspector]
-        public RequiredReferences reqReferences;
         public bool isExpanded;
+
+        [HideInInspector] public ReorderableList reorderableList = null;
+
+        [HideInInspector] public RequiredReferences reqReferences;
     }
 
     /// <summary>
-    /// Base class that most be used for any dictionary that wants to be implemented
+    ///     Base class that most be used for any dictionary that wants to be implemented
     /// </summary>
     /// <typeparam name="TKey">Key type</typeparam>
     /// <typeparam name="TValue">Value type</typeparam>
-    [System.Serializable]
-    public class SerializableDictionaryBase<TKey, TValue> : DrawableDictionary, IDictionary<TKey, TValue>, UnityEngine.ISerializationCallbackReceiver
+    [Serializable]
+    public class SerializableDictionaryBase<TKey, TValue> : DrawableDictionary, IDictionary<TKey, TValue>,
+        ISerializationCallbackReceiver
     {
+        private static readonly Dictionary<TKey, TValue> _staticEmptyDict = new Dictionary<TKey, TValue>(0);
         private Dictionary<TKey, TValue> _dict;
-        private readonly static Dictionary<TKey, TValue> _staticEmptyDict = new Dictionary<TKey, TValue>(0);
 
         /// <summary>
-        /// Copies the data from a dictionary. If an entry with the same key is found it replaces the value
+        ///     Copies the data from a dictionary. If an entry with the same key is found it replaces the value
         /// </summary>
         /// <param name="src">Dictionary to copy the data from</param>
         public void CopyFrom(IDictionary<TKey, TValue> src)
         {
             foreach (var data in src)
-            {
                 if (ContainsKey(data.Key))
-                {
                     this[data.Key] = data.Value;
-                }
                 else
-                {
                     Add(data.Key, data.Value);
-                }
-            }
         }
 
         /// <summary>
-        /// Copies the data from a dictionary. If an entry with the same key is found it replaces the value. Note that if the <paramref name="src"/> is not a dictionary of the same type it will not be copied
+        ///     Copies the data from a dictionary. If an entry with the same key is found it replaces the value. Note that if the
+        ///     <paramref name="src" /> is not a dictionary of the same type it will not be copied
         /// </summary>
         /// <param name="src">Dictionary to copy the data from</param>
         public void CopyFrom(object src)
         {
             var dictionary = src as Dictionary<TKey, TValue>;
-            if (dictionary != null)
-            {
-                CopyFrom(dictionary);
-            }
+            if (dictionary != null) CopyFrom(dictionary);
         }
 
         /// <summary>
-        /// Copies the data to a dictionary. If an entry with the same key is found it replaces the value
+        ///     Copies the data to a dictionary. If an entry with the same key is found it replaces the value
         /// </summary>
         /// <param name="dest">Dictionary to copy the data to</param>
         public void CopyTo(IDictionary<TKey, TValue> dest)
         {
             foreach (var data in this)
-            {
                 if (dest.ContainsKey(data.Key))
-                {
                     dest[data.Key] = data.Value;
-                }
                 else
-                {
                     dest.Add(data.Key, data.Value);
-                }
-            }
         }
 
         /// <summary>
-        /// Returns a copy of the dictionary.
+        ///     Returns a copy of the dictionary.
         /// </summary>
         public Dictionary<TKey, TValue> Clone()
         {
-            Dictionary<TKey, TValue> dest = new Dictionary<TKey, TValue>(Count);
+            var dest = new Dictionary<TKey, TValue>(Count);
 
-            foreach (var data in this)
-            {
-                dest.Add(data.Key, data.Value);
-            }
+            foreach (var data in this) dest.Add(data.Key, data.Value);
 
             return dest;
         }
 
         /// <summary>
-        /// Returns true if the value exists; otherwise, false
+        ///     Returns true if the value exists; otherwise, false
         /// </summary>
         /// <param name="value">Value to check</param>
         public bool ContainsValue(TValue value)
@@ -145,18 +134,9 @@ namespace RotaryHeart.Lib.SerializableDictionary
             }
         }
 
-        public int Count
-        {
-            get
-            {
-                return (_dict != null) ? _dict.Count : 0;
-            }
-        }
+        public int Count => _dict != null ? _dict.Count : 0;
 
-        bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
-        {
-            get { return false; }
-        }
+        bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => false;
 
         #endregion Properties
 
@@ -235,7 +215,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
             return _dict.GetEnumerator();
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
@@ -249,15 +229,13 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
         #region ISerializationCallbackReceiver
 
-        [UnityEngine.SerializeField]
-        private List<TKey> _keyValues;
+        [SerializeField] private List<TKey> _keyValues;
 
-        [UnityEngine.SerializeField]
-        private TKey[] _keys;
-        [UnityEngine.SerializeField]
-        private TValue[] _values;
+        [SerializeField] private TKey[] _keys;
 
-        void UnityEngine.ISerializationCallbackReceiver.OnAfterDeserialize()
+        [SerializeField] private TValue[] _values;
+
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
             if (_keys != null && _values != null)
             {
@@ -267,46 +245,46 @@ namespace RotaryHeart.Lib.SerializableDictionary
                 else
                     _dict.Clear();
 
-                for (int i = 0; i < _keys.Length; i++)
+                for (var i = 0; i < _keys.Length; i++)
                 {
                     //This should only happen with reference type keys (Generic, Object, etc)
                     if (_keys[i] == null)
                     {
                         //Special case for UnityEngine.Object classes
-                        if (typeof(UnityEngine.Object).IsAssignableFrom(typeof(TKey)))
+                        if (typeof(Object).IsAssignableFrom(typeof(TKey)))
                         {
                             //Key type
-                            string tKeyType = typeof(TKey).ToString();
+                            var tKeyType = typeof(TKey).ToString();
 
                             //We need the reference to the reference holder class
                             if (reqReferences == null)
                             {
-                                UnityEngine.Debug.LogError("A key of type: " + tKeyType + " requires to have a valid RequiredReferences reference");
+                                Debug.LogError("A key of type: " + tKeyType +
+                                               " requires to have a valid RequiredReferences reference");
                                 continue;
                             }
 
                             //Use reflection to check all the fields included on the class
-                            foreach (var field in typeof(RequiredReferences).GetFields(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic))
-                            {
+                            foreach (var field in typeof(RequiredReferences).GetFields(
+                                    BindingFlags.Instance | BindingFlags.NonPublic))
                                 //Only set the value if the type is the same
                                 if (field.FieldType.ToString().Equals(tKeyType))
                                 {
-                                    _keys[i] = (TKey)(field.GetValue(reqReferences));
+                                    _keys[i] = (TKey) field.GetValue(reqReferences);
                                     break;
                                 }
-                            }
 
                             //References class is missing the field, skip the element
                             if (_keys[i] == null)
                             {
-                                UnityEngine.Debug.LogError("Couldn't find " + tKeyType + " reference.");
+                                Debug.LogError("Couldn't find " + tKeyType + " reference.");
                                 continue;
                             }
                         }
                         else
                         {
                             //Create a instance for the key
-                            _keys[i] = System.Activator.CreateInstance<TKey>();
+                            _keys[i] = Activator.CreateInstance<TKey>();
                         }
                     }
 
@@ -322,7 +300,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
             _values = null;
         }
 
-        void UnityEngine.ISerializationCallbackReceiver.OnBeforeSerialize()
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
             if (_dict == null || _dict.Count == 0)
             {
@@ -333,11 +311,11 @@ namespace RotaryHeart.Lib.SerializableDictionary
             else
             {
                 //Initialize arrays
-                int cnt = _dict.Count;
+                var cnt = _dict.Count;
                 _keys = new TKey[cnt];
                 _values = new TValue[cnt];
 
-                int i = 0;
+                var i = 0;
                 var e = _dict.GetEnumerator();
                 while (e.MoveNext())
                 {
@@ -350,6 +328,5 @@ namespace RotaryHeart.Lib.SerializableDictionary
         }
 
         #endregion
-
     }
 }

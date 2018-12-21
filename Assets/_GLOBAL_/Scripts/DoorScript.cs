@@ -10,16 +10,19 @@
 
 using UnityEngine;
 
-public class DoorScript : MonoBehaviour {
+public class DoorScript : MonoBehaviour
+{
+    public bool _isDoorOpen;
 
-	public bool _isDoorOpen = false;
+    public void ToggleDoorState()
+    {
+        _isDoorOpen = !_isDoorOpen;
+    }
 
-	public void ToggleDoorState()
-		=> _isDoorOpen = !_isDoorOpen;
-
-	public void OnTriggerEnter2D(Collider2D collider)
-	{
-		if(!_isDoorOpen) return; //Print message saying do X to open door?
-		GameLevel.NextLevel();
-	}
+    public void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (!_isDoorOpen) return; //Print message saying do X to open door?
+        Debug.Log("Load next level.");
+        //GameLevel.NextLevel();
+    }
 }

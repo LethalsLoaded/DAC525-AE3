@@ -10,7 +10,8 @@
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Template_Enemy_Attack_Ability", menuName = "Character_Abilities/Template_Enemy/Attack", order = 1)]
+[CreateAssetMenu(fileName = "Template_Enemy_Attack_Ability", menuName = "Character_Abilities/Template_Enemy/Attack",
+    order = 1)]
 public class TemplateEnemyAttackAbilityScript : Ability
 {
     public override void Start()
@@ -20,11 +21,11 @@ public class TemplateEnemyAttackAbilityScript : Ability
 
     public override void Update()
     {
-		// Do stuff on update which is every frame
+        // Do stuff on update which is every frame
     }
 
     public override void Use()
     {
-		// Do stuff when an ability is used (set trajectory etc)
+        // Do stuff when an ability is used (set trajectory etc)
     }
 }

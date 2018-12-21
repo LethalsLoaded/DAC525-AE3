@@ -12,27 +12,29 @@ using UnityEngine;
 
 public abstract class Ability : ScriptableObject
 {
-	[Header("- Ability Information -")]
-	public string abilityName;
-	public string abilityDescription;
-	public string abilityInstructions;
-	public float cooldownPeriod;
-	[Tooltip("The amount the ability will do.\nFor example:\n  It will heal for abilityValue.\n  It will damage for abilityValue.")]
-	public float abilityValue;
-	
-	[HideInInspector]
-	public bool isActive = false;
+    public Animation abilityAnimation;
+    public string abilityDescription;
+    public string abilityInstructions;
 
-	protected float cooldownSecondsRemaining;
+    [Header("- Ability Information -")] public string abilityName;
 
-	[Header("- Ability Variables -")]
-	[Tooltip("The object that will be spawned if appropiate.")]
-	public GameObject abilityPrefab;
-	public GameObject abilityOwner;
-	public Animation abilityAnimation;
-	//public Particle abilityParticle;
+    public GameObject abilityOwner;
 
-	public abstract void Start();
-	public abstract void Update();
-	public abstract void Use();
+    [Header("- Ability Variables -")] [Tooltip("The object that will be spawned if appropiate.")]
+    public GameObject abilityPrefab;
+
+    [Tooltip(
+        "The amount the ability will do.\nFor example:\n  It will heal for abilityValue.\n  It will damage for abilityValue.")]
+    public float abilityValue;
+
+    public float cooldownPeriod;
+
+    protected float cooldownSecondsRemaining;
+
+    [HideInInspector] public bool isActive = false;
+    //public Particle abilityParticle;
+
+    public abstract void Start();
+    public abstract void Update();
+    public abstract void Use();
 }

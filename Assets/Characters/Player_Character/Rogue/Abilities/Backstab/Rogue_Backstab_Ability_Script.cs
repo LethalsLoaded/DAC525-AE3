@@ -11,8 +11,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Rogue_Backstab_Ability", menuName = "Character_Abilities/Rogue/Backstab", order = 2)]
-public class Rogue_Backstab_Ability_Script : Ability {
-
+public class Rogue_Backstab_Ability_Script : Ability
+{
     public override void Start()
     {
         // Do stuff here when an ability is SPAWNED into the world
@@ -20,11 +20,11 @@ public class Rogue_Backstab_Ability_Script : Ability {
 
     public override void Update()
     {
-		// Do stuff on update which is every frame
+        // Do stuff on update which is every frame
     }
 
     public override void Use()
     {
-		// Do stuff when an ability is used (set trajectory etc)
+        // Do stuff when an ability is used (set trajectory etc)
     }
 }

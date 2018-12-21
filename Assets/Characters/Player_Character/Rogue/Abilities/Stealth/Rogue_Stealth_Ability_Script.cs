@@ -11,34 +11,35 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Rogue_Stealth_Ability", menuName = "Character_Abilities/Rogue/Stealth", order = 2)]
-public class Rogue_Stealth_Ability_Script : Ability {
+public class Rogue_Stealth_Ability_Script : Ability
+{
+    public float maxDistanceToEnemy = 1;
 
     public float movementPenaltyPercentage = 40;
-    public float maxDistanceToEnemy = 1;
 
     public override void Start()
     {
-      isActive = false;
+        isActive = false;
     }
 
     public override void Update()
     {
-      Debug.Log($"{isActive}");
-		  //Debug.Log($"{abilityName} ({isActive}) | Pos: " + abilityOwner.transform.position);
+        Debug.Log($"{isActive}");
+        //Debug.Log($"{abilityName} ({isActive}) | Pos: " + abilityOwner.transform.position);
     }
 
     public override void Use()
     {
-      Debug.Log(abilityOwner.transform.position);
-      if(abilityOwner.GetComponent<Rogue_Script>().inCombat) return;
+        Debug.Log(abilityOwner.transform.position);
+        if (abilityOwner.GetComponent<Rogue_Script>().inCombat) return;
 
-      isActive = !isActive;
-      var colora = abilityOwner.GetComponent<SpriteRenderer>().color;
-      colora.a = isActive ? 0.5f : 1f;
-      abilityOwner.GetComponent<SpriteRenderer>().color = colora;
+        isActive = !isActive;
+        var colora = abilityOwner.GetComponent<SpriteRenderer>().color;
+        colora.a = isActive ? 0.5f : 1f;
+        abilityOwner.GetComponent<SpriteRenderer>().color = colora;
 
-      Debug.Log(isActive ? "Stealthed" : "Unstealthed");
-        
-		// Do stuff when an ability is used (set trajectory etc)
+        Debug.Log(isActive ? "Stealthed" : "Unstealthed");
+
+        // Do stuff when an ability is used (set trajectory etc)
     }
 }

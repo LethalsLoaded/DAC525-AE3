@@ -7,6 +7,8 @@
  *
  * NAME, DATE OF EDIT, CONTENT EDITED:
  */
+
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Health_Potion_Item", menuName = "Items/Potions/Health_Potion", order = 1)]
@@ -14,6 +16,6 @@ public class Health_Potion_Script : Item
 {
     public override void Use()
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }

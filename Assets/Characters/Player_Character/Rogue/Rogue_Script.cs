@@ -9,12 +9,11 @@
  */
 
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Rogue_Script : Entity
 {
-    bool _moveRight = false;
-    bool _moveLeft = false;
+    private bool _moveLeft;
+    private bool _moveRight;
     public float _rayLength = 1;
 
     public bool inCombat = false;
@@ -22,11 +21,10 @@ public class Rogue_Script : Entity
     protected override void OnSpawn()
     {
         // Do stuff when entity is spawned
-        foreach(var ability in this.entityAbilities)
-        {
+        foreach (var ability in entityAbilities)
             ability.abilityOwner = gameObject;
-        }
 
+        GameObject.FindGameObjectWithTag("PLAYER").transform.position = GameLevel.GetActiveLevel().levelStartPoint;
     }
 
     protected override void OnDeath(Entity entityKiller = null)
@@ -44,31 +42,28 @@ public class Rogue_Script : Entity
         // Do stuff when interacted with by entityInteracter
     }
 
-    public void UseAbility(Ability ability)
-    {
-        ability.Use();
-    }
-
     public void MoveLeft()
     {
         _moveLeft = !_moveLeft;
+        if (_moveLeft) entityFacingDirection = Direction.WEST;
     }
 
     public void MoveRight()
     {
         _moveRight = !_moveRight;
+        if (_moveRight) entityFacingDirection = Direction.EAST;
     }
 
     public void Jump()
     {
         //if(isInTheAir && blink is not active) UseAbility(GetAbility"Blink");
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, this.entityJumpStrength));
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, entityJumpStrength));
     }
 
     public void Attack()
     {
-        if(GetAbility("Stealth").isActive) // AND ENEMY IS X AWAY AND FACING RIGHT WAY
-        {  
+        if (GetAbility("Stealth").isActive) // AND ENEMY IS X AWAY AND FACING RIGHT WAY
+        {
             UseAbility(GetAbility("Backstab"));
             return;
         }
@@ -80,29 +75,34 @@ public class Rogue_Script : Entity
     private void Flip()
     {
         var playerRigidBody = GetComponent<Rigidbody2D>();
-        if(playerRigidBody.velocity.x > 0 && transform.localScale.x > 0 || playerRigidBody.velocity.x < 0 && transform.localScale.x < 0)
+        if (playerRigidBody.velocity.x > 0 && transform.localScale.x > 0 ||
+            playerRigidBody.velocity.x < 0 && transform.localScale.x < 0)
         {
-        Vector2 vector = transform.localScale;
-        vector.x *= -1;
-        transform.localScale = vector;
+            Vector2 vector = transform.localScale;
+            vector.x *= -1;
+            transform.localScale = vector;
         }
     }
 
     // Necessary to execute 'OnSpawn()'
-    void Start()
-        => OnSpawn();
-
-    void Update()
+    private void Start()
     {
-        entityIsOnGround = Physics2D.Linecast(transform.position, transform.position + new Vector3(0, _rayLength, 0), 1 << LayerMask.NameToLayer("Land"));
+        OnSpawn();
+    }
 
-        if(_moveRight && !_moveLeft)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(1 * this.entitySpeed, GetComponent<Rigidbody2D>().velocity.y);
-        }
+    private void Update()
+    {
+        entityIsOnGround = Physics2D.Linecast(transform.position, transform.position + new Vector3(0, _rayLength, 0),
+            1 << LayerMask.NameToLayer("Land"));
+
+        if (_moveRight && !_moveLeft)
+            GetComponent<Rigidbody2D>().velocity = new Vector2(1 * entitySpeed, GetComponent<Rigidbody2D>().velocity.y);
+
         else if (!_moveRight && _moveLeft)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-1 * this.entitySpeed, GetComponent<Rigidbody2D>().velocity.y);
-        }        
+            GetComponent<Rigidbody2D>().velocity =
+                new Vector2(-1 * entitySpeed, GetComponent<Rigidbody2D>().velocity.y);
+
+        else
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
     }
 }

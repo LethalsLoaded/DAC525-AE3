@@ -10,24 +10,24 @@
 
 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Linq;
 
 public class InputManager : MonoBehaviour
 {
-
     public UnityEvent _onSwipeUpEvent, _onSwipeDownEvent, _onSwipeRightEvent, _onSwipeLeftEvent;
+    private readonly IList<int> blacklist = new List<int>();
     public IList<int> touchesToTrack = new List<int>();
 
 
-	void Start()
+    private void Start()
     {
         // Ensure that we have MT enabled.
         Input.multiTouchEnabled = true;
     }
-IList<int> blacklist = new List<int>();
-    void Update()
+
+    private void Update()
     {
         // foreach(var i in Input.touches)
         // {
@@ -37,31 +37,33 @@ IList<int> blacklist = new List<int>();
         //         touchesToTrack.Remove(i.fingerId);
         // }
 
-        
-        foreach(var i in Input.touches.Where(x=>x.phase != TouchPhase.Ended && x.GetSwipeDirection() != TouchHandler.directions.None))
+
+        foreach (var i in Input.touches.Where(x =>
+            x.phase != TouchPhase.Ended && x.GetSwipeDirection() != TouchHandler.directions.None))
         {
-            if(blacklist.Contains(i.fingerId))
+            if (blacklist.Contains(i.fingerId))
                 break;
             Debug.Log($"A: {i.GetSwipeDirection()}");
-            switch(i.GetSwipeDirection())
+            switch (i.GetSwipeDirection())
             {
                 case TouchHandler.directions.Up:
-                _onSwipeUpEvent.Invoke();
-                break;
+                    _onSwipeUpEvent.Invoke();
+                    break;
                 case TouchHandler.directions.Down:
-                _onSwipeDownEvent.Invoke();
-                break;
+                    _onSwipeDownEvent.Invoke();
+                    break;
                 case TouchHandler.directions.Left:
-                _onSwipeLeftEvent.Invoke();
-                break;
+                    _onSwipeLeftEvent.Invoke();
+                    break;
                 case TouchHandler.directions.Right:
-                _onSwipeRightEvent.Invoke();
-                break;
+                    _onSwipeRightEvent.Invoke();
+                    break;
             }
+
             blacklist.Add(i.fingerId);
         }
 
-        foreach(var i in Input.touches.Where(x=>x.phase == TouchPhase.Ended))
+        foreach (var i in Input.touches.Where(x => x.phase == TouchPhase.Ended))
             blacklist.Remove(i.fingerId);
 
         // foreach(var i in Input.touches.Where(x=> touchesToTrack.Contains(x.fingerId) && x.phase == TouchPhase.Ended))

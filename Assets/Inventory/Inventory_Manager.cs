@@ -7,79 +7,83 @@
  *
  * NAME, DATE OF EDIT, CONTENT EDITED:
  */
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory_Manager : MonoBehaviour {
+public class Inventory_Manager : MonoBehaviour
+{
+    private static Inventory_Manager instance;
 
-	public IDictionary<GameObject, Item> inventoryItems = new Dictionary<GameObject, Item>();
-	private static Inventory_Manager instance = null;
-	void Awake()
-	{
-		if(instance == null) instance = this;
-		else if (instance != this) Destroy(gameObject);
-	}
-	void Start () 
-	{
-		foreach(Transform item in GameObject.Find("Inventory Panel").transform)
-		{
-			inventoryItems.Add(item.gameObject, null);
-		}
-	}
+    public IDictionary<GameObject, Item> inventoryItems = new Dictionary<GameObject, Item>();
 
-	public void AddItemToInventory(Item itemToAdd)
-	{
-		// Find first free slot
-		Debug.Log(inventoryItems.Count);
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
+    }
 
-		foreach(var item in inventoryItems)
-		{
-			if(item.Value != null) continue;
-			// Add an item to it
-			inventoryItems[item.Key] = itemToAdd;
-			UpdateUI();
-			break;
-		}
-	}
+    private void Start()
+    {
+        foreach (Transform item in GameObject.Find("Inventory Panel").transform)
+            inventoryItems.Add(item.gameObject, null);
+    }
 
-	public void RemoveItemFromInventory(Item itemToRemove)
-	{
-		foreach(var item in inventoryItems)
-		{
-			if(item.Value == null || item.Value.GetID() != itemToRemove.GetID()) continue;
-			inventoryItems[item.Key] = null;
-			UpdateUI();
-			break;
-		}
-	}
+    public void AddItemToInventory(Item itemToAdd)
+    {
+        // Find first free slot
+        Debug.Log(inventoryItems.Count);
 
-	public void RemoveItemFromSlot(GameObject slot)
-	{
-		if(inventoryItems[slot] == null) return;
-		inventoryItems[slot] = null;
-		UpdateUI();
-	}
+        foreach (var item in inventoryItems)
+        {
+            if (item.Value != null) continue;
+            // Add an item to it
+            inventoryItems[item.Key] = itemToAdd;
+            UpdateUI();
+            break;
+        }
+    }
 
-	public void UpdateUI()
-	{
-		foreach(var item in inventoryItems)
-		{
-			GameObject slot = item.Key;
-			Item pairItem = item.Value;
+    public void RemoveItemFromInventory(Item itemToRemove)
+    {
+        foreach (var item in inventoryItems)
+        {
+            if (item.Value == null || item.Value.GetID() != itemToRemove.GetID()) continue;
+            inventoryItems[item.Key] = null;
+            UpdateUI();
+            break;
+        }
+    }
 
-			if(pairItem == null) slot.transform.GetChild(0).GetComponent<Image>().enabled = false;
-			else slot.transform.GetChild(0).GetComponent<Image>().enabled = true;
+    public void RemoveItemFromSlot(GameObject slot)
+    {
+        if (inventoryItems[slot] == null) return;
+        inventoryItems[slot] = null;
+        UpdateUI();
+    }
 
-			slot.transform.GetChild(0).GetComponent<Image>().sprite = (item.Value != null ? item.Value.itemSprite : null);
-		}
-	}
+    public void UpdateUI()
+    {
+        foreach (var item in inventoryItems)
+        {
+            var slot = item.Key;
+            var pairItem = item.Value;
 
-	public static Inventory_Manager GetInstance()
-		=> instance;
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+            if (pairItem == null) slot.transform.GetChild(0).GetComponent<Image>().enabled = false;
+            else slot.transform.GetChild(0).GetComponent<Image>().enabled = true;
+
+            slot.transform.GetChild(0).GetComponent<Image>().sprite = item.Value != null ? item.Value.itemSprite : null;
+        }
+    }
+
+    public static Inventory_Manager GetInstance()
+    {
+        return instance;
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+    }
 }

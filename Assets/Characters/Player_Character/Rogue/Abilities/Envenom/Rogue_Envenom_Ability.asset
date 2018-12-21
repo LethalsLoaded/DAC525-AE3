@@ -11,13 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d402c10e67f7b8147ae9d2f445bfc63f, type: 3}
   m_Name: Rogue_Envenom_Ability
   m_EditorClassIdentifier: 
-  abilityName: 
-  abilityDescription: 
-  abilityInstructions: 
-  cooldownPeriod: 0
-  abilityValue: 0
+  abilityName: Envenom
+  abilityDescription: Allows you to use up a poisoner's kit to envenom both your blades.
+  abilityInstructions: Swipe up
+  cooldownPeriod: 60
+  abilityValue: 1
   isActive: 0
   abilityPrefab: {fileID: 0}
   abilityOwner: {fileID: 0}
   abilityAnimation: {fileID: 0}
-  _secondsUntilDeactivate: 0
+  _secondsUntilDeactivate: 15

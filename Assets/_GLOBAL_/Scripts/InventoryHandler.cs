@@ -7,9 +7,9 @@
  *
  * NAME, DATE OF EDIT, CONTENT EDITED:
  */
+
 using UnityEngine;
 
 public class InventoryHandler : MonoBehaviour
 {
-	
 }
