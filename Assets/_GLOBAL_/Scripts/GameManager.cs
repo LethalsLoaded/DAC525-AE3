@@ -10,6 +10,7 @@
 
 
 using System;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -47,10 +48,17 @@ public class GameManager : MonoBehaviour
 
     #region PUBLIC_VARIABLES
 
+    [Header("- Gameplay Information -")]
     public int startingLives = 3; // The lives that player will start with
     public int maxLives = 3; // The maximum allowed lives as player can collect more throughout the levels
 
+    [Header("- Rooms -")]
     public GameLevel[] playableLevels;
+
+    [Header("- Object Variables -")]
+    public GameObject notificationBoxUI;
+    public GameObject controlsUI;
+    public GameObject playerCharacter;
 
     #endregion
 
@@ -115,6 +123,14 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null) throw new Exception("Game Manager hasn't been initialaized.");
         return instance;
+    }
+
+    public void Start()
+    {
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     #endregion

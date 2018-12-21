@@ -59,7 +59,7 @@ public class GameLevel
     {
         var scene = SceneManager.GetActiveScene();
 
-        return GameManager.GetInstance().playableLevels.First
+        return GameManager.GetInstance().playableLevels.FirstOrDefault
         (
             x => x.GetSceneName().ToLower() == scene.name.ToLower()
         );

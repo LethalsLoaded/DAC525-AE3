@@ -11,14 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d91f6e5976b0240a810db71fc49411, type: 3}
   m_Name: Rogue_Basic_Ability
   m_EditorClassIdentifier: 
-  abilityName: Basic Attack
+  abilityAnimation: {fileID: 0}
   abilityDescription: Uses the dagger to cause serious damage.
   abilityInstructions: N/A
-  cooldownPeriod: 1
-  abilityValue: 3
-  isActive: 1
-  abilityPrefab: {fileID: 0}
+  abilityName: Basic
   abilityOwner: {fileID: 0}
-  abilityAnimation: {fileID: 0}
-  _minimumDamage: 1
+  abilityPrefab: {fileID: 0}
+  abilityValue: 3
+  cooldownPeriod: 1
+  isActive: 1
   _distanceToHit: 1100
+  _minimumDamage: 1

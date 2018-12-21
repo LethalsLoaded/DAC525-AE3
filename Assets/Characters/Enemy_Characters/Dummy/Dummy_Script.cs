@@ -39,5 +39,7 @@ public class Dummy_Script : Entity
     // Update is called once per frame
     private void Update()
     {
+        if(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > 0.5f)
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.ClampMagnitude(gameObject.GetComponent<Rigidbody2D>().velocity, 0.5f);
     }
 }

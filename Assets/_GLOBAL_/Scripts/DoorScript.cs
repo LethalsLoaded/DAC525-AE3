@@ -23,6 +23,6 @@ public class DoorScript : MonoBehaviour
     {
         if (!_isDoorOpen) return; //Print message saying do X to open door?
         Debug.Log("Load next level.");
-        //GameLevel.NextLevel();
+        GameLevel.NextLevel();
     }
 }

@@ -37,6 +37,8 @@ public class CameraPlayerFollow : MonoBehaviour
     {
         startPosition = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
         maxPosition = new Vector2(xMost, yMost);
+
+        objectToFollow = GameManager.GetInstance().playerCharacter;
     }
 
     // Update is called once per frame

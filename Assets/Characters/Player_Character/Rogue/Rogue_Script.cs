@@ -18,13 +18,23 @@ public class Rogue_Script : Entity
 
     public bool inCombat = false;
 
+    private Rogue_Script _instance;
+
     protected override void OnSpawn()
     {
+        if (_instance == null) _instance = this;
+        else if (_instance != this) Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
+        
         // Do stuff when entity is spawned
         foreach (var ability in entityAbilities)
             ability.abilityOwner = gameObject;
 
-        GameObject.FindGameObjectWithTag("PLAYER").transform.position = GameLevel.GetActiveLevel().levelStartPoint;
+        if(GameLevel.GetActiveLevel() != null)
+            GameObject.FindGameObjectWithTag("PLAYER").transform.position = GameLevel.GetActiveLevel().levelStartPoint;
+
+        gameObject.SetActive(false);
     }
 
     protected override void OnDeath(Entity entityKiller = null)
@@ -92,8 +102,11 @@ public class Rogue_Script : Entity
 
     private void Update()
     {
-        entityIsOnGround = Physics2D.Linecast(transform.position, transform.position + new Vector3(0, _rayLength, 0),
-            1 << LayerMask.NameToLayer("Land"));
+        // entityIsOnGround = Physics2D.Linecast(transform.position, transform.position + new Vector3(0, _rayLength, 0),
+        //     1 << LayerMask.NameToLayer("Level_Layer"));
+
+        entityIsOnGround = Physics2D.Raycast(transform.position, -transform.up, _rayLength, 1 << LayerMask.NameToLayer("Land"));
+        Debug.DrawRay(transform.position, -transform.up, Color.gray);
 
         if (_moveRight && !_moveLeft)
             GetComponent<Rigidbody2D>().velocity = new Vector2(1 * entitySpeed, GetComponent<Rigidbody2D>().velocity.y);

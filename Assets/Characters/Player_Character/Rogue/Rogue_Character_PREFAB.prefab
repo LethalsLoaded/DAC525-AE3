@@ -25,11 +25,11 @@ GameObject:
   - component: {fileID: 61881724578603360}
   m_Layer: 0
   m_Name: Rogue_Character_PREFAB
-  m_TagString: Untagged
+  m_TagString: PLAYER
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4624813851886404
 Transform:
   m_ObjectHideFlags: 1
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1185922740059180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.07, y: -7.89, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,7 +62,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61881724578603360
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -99,28 +99,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac32353da8185d408e5511d9a37324c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityName: Rogue
-  entityDescription: A trickster of sorts, one with the shadows, silent as a cat,
-    deadly as a viper, the rogue is a very dangerous adversary when he catches you
-    off-guard. If you survive his initial onslaught, you may live to tell the tale...
-    Sometimes...
-  entityType: 0
-  entityHitPoints: 3
-  entityMaxHitPoints: 3
-  entityMaxSpeed: 5
-  entitySpeed: 5
-  entityJumpStrength: 1000
-  entityIsInteractable: 0
-  isPlayer: 1
-  isDead: 0
   entityAbilities:
   - {fileID: 11400000, guid: 7dbfcbd3a22084941a0ba2ed275b8bca, type: 2}
   - {fileID: 11400000, guid: f91d10adbe0ef6f4e806b4187e9e3e51, type: 2}
   - {fileID: 11400000, guid: cca3fe77e12b71e47b42778d22cbb010, type: 2}
   - {fileID: 11400000, guid: 1bb9234892a3fa64a8170f2abfc5159f, type: 2}
+  entityDescription: A trickster of sorts, one with the shadows, silent as a cat,
+    deadly as a viper, the rogue is a very dangerous adversary when he catches you
+    off-guard. If you survive his initial onslaught, you may live to tell the tale...
+    Sometimes...
   entityDrops: []
   entityFacingDirection: 2
+  entityHitPoints: 3
+  entityIsInteractable: 0
   entityIsOnGround: 0
+  entityJumpStrength: 280
+  entityMaxHitPoints: 3
+  entityMaxSpeed: 3
+  entityName: Rogue
+  entitySpeed: 5
+  entityType: 0
+  isDead: 0
+  isPlayer: 1
   _rayLength: 1
   inCombat: 0
 --- !u!212 &212576010268567354

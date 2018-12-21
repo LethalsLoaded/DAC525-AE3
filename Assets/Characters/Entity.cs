@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
@@ -44,7 +45,7 @@ public abstract class Entity : MonoBehaviour
 {
     [Header("- Entity Object Variables -")]
     //public GameObject entityPrefab;
-    public Ability[] entityAbilities;
+    public List<Ability> entityAbilities = new List<Ability>();
 
     public string entityDescription;
     public DropsDictionary[] entityDrops;
@@ -115,7 +116,14 @@ public abstract class Entity : MonoBehaviour
 
     public Ability GetAbility(string name)
     {
-        return entityAbilities.First(x => x.abilityName == name);
+        return entityAbilities.FirstOrDefault(x => x.abilityName == name);
+    }
+
+    public void AddAbility(Ability ability)
+    {
+        if(entityAbilities.Contains(ability)) return;
+        entityAbilities.Add(ability);
+        ability.abilityOwner = gameObject;
     }
 
     public void Hit(int damage, Entity damager)
@@ -124,6 +132,8 @@ public abstract class Entity : MonoBehaviour
         if (entityHitPoints <= 0)
         {
             isDead = true;
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
+            gameObject.GetComponent<Rigidbody2D>().simulated = false;
             OnDeath(damager);
         }
         else
@@ -137,6 +147,7 @@ public abstract class Entity : MonoBehaviour
     {
         var sprite = gameObject.GetComponent<SpriteRenderer>();
         var originalColor = sprite.color;
+        originalColor.a = 1.0f;
         var fadedColor = new Color(sprite.color.r, sprite.color.g, sprite.color.b, blinkAlpha);
         for (var i = 0; i < amount; i++)
         {
