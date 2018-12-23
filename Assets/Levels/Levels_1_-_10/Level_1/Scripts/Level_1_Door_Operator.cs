@@ -13,6 +13,5 @@ public class Level_1_Door_Operator : MonoBehaviour
         if(aliveEnemies != 0) return;
         allTasksComplete = true;
         GameObject.FindGameObjectWithTag("DOOR").GetComponent<DoorScript>()._isDoorOpen = true;
-        
     }
 }

@@ -66,17 +66,24 @@ public abstract class Entity : MonoBehaviour
     public float entitySpeed = 5.0f;
     public EntityType entityType;
     public bool isDead;
-    public bool isPlayer = false;
+    public bool isPlayer;
 
-    private void Start()
+    protected virtual void Start()
     {
         gameObject.name = entityName + $" ({(isPlayer ? "PLAYER" : "ENTITY")})";
         gameObject.tag = isPlayer ? "PLAYER" : "ENTITY";
+
+        foreach (var ability in entityAbilities)
+            ability.abilityOwner = gameObject;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        foreach (var item in entityAbilities.Where(x => x.isActive)) item.Update();
+        foreach (var item in entityAbilities.Where(x => x.isActive))
+            {
+                item.Update();
+            }
+
     }
 
     /// <summary>
@@ -112,6 +119,11 @@ public abstract class Entity : MonoBehaviour
         // Ensure we have the ability to use it
         if (!entityAbilities.Contains(ability)) return;
         ability.Use();
+    }
+
+    public bool HasAbility(string name)
+    {
+        return entityAbilities.FirstOrDefault(x=>x.abilityName == name);
     }
 
     public Ability GetAbility(string name)

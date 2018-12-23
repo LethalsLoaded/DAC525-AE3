@@ -16,22 +16,32 @@ public class CanvasScript : MonoBehaviour {
 
 	public void HideNotificationBoxNonStatic()
 	{
-		GameManager.GetInstance().notificationBoxUI.SetActive(false);
+		var notificationUI = GameManager.GetInstance().notificationBoxUI;
+		notificationUI.SetActive(false);
+		notificationUI.GetComponentsInChildren<Transform>(true).First(x=>x.name == "Notification_Mark").gameObject.SetActive(false);
+		InputManager.GetInstance()._onNotificationClose.Invoke();
 	}
 
 	public static void HideNotificationBox()
 	{
-		GameManager.GetInstance().notificationBoxUI.SetActive(false);
+		var notificationUI = GameManager.GetInstance().notificationBoxUI;
+		notificationUI.SetActive(false);
+		notificationUI.GetComponentsInChildren<Transform>(true).First(x=>x.name == "Notification_Mark").gameObject.SetActive(false);
+		InputManager.GetInstance()._onNotificationClose.Invoke();
 	}
 
-	public static void ShowNotificationBox()
+	public static void ShowNotificationBox(bool showNotificationMark = false)
 	{
-		GameManager.GetInstance().notificationBoxUI.SetActive(true);
+		var notificationUI = GameManager.GetInstance().notificationBoxUI;
+		notificationUI.SetActive(true);
+		if(showNotificationMark)
+			notificationUI.GetComponentsInChildren<Transform>(true).First(x=>x.name == "Notification_Mark").gameObject.SetActive(true);
+		InputManager.GetInstance()._onNotificationOpen.Invoke();
 	}
 
 	public static void SetNotificationBoxTitle(string newText)
 	{
-		var headerTree = GameManager.GetInstance().notificationBoxUI.GetComponentsInChildren<Transform>().First(x=>x.name == "Header").gameObject;
+		var headerTree = GameManager.GetInstance().notificationBoxUI.GetComponentsInChildren<Transform>(true).First(x=>x.name == "Header").gameObject;
 		var textBox = headerTree.transform.GetChild(0);
 
 		textBox.GetComponent<Text>().text = newText;
@@ -39,7 +49,7 @@ public class CanvasScript : MonoBehaviour {
 
 	public static void SetNotificationBoxText(string newText)
 	{
-		var textTree = GameManager.GetInstance().notificationBoxUI.GetComponentsInChildren<Transform>().First(x=>x.name == "Text_Padding").gameObject;
+		var textTree = GameManager.GetInstance().notificationBoxUI.GetComponentsInChildren<Transform>(true).First(x=>x.name == "Text_Padding").gameObject;
 		var textBox = textTree.transform.GetChild(0).GetChild(0).GetChild(0);
 
 		textBox.GetComponent<Text>().text = newText;
@@ -47,7 +57,7 @@ public class CanvasScript : MonoBehaviour {
 
 	public static void SetNotificationBoxCloseText(string newText)
 	{
-		var headerTree = GameManager.GetInstance().notificationBoxUI.GetComponentsInChildren<Transform>().First(x=>x.name == "Close_Button").gameObject;
+		var headerTree = GameManager.GetInstance().notificationBoxUI.GetComponentsInChildren<Transform>(true).First(x=>x.name == "Close_Button").gameObject;
 		var textBox = headerTree.transform.GetChild(0);
 
 		textBox.GetComponent<Text>().text = newText;

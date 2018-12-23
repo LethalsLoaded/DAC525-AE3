@@ -37,4 +37,13 @@ public abstract class Ability : ScriptableObject
     public abstract void Start();
     public abstract void Update();
     public abstract void Use();
+
+    public static void NewAbilityNotification(Ability ability, string optional = "")
+    {
+        InputManager.GetInstance()._onNotificationClose.RemoveAllListeners();
+        CanvasScript.SetNotificationBoxTitle($"<b>New ability\nunlocked!</b>");
+		CanvasScript.SetNotificationBoxText($"<b>{ability.abilityName}\n\n{ability.abilityDescription}\n\n{ability.abilityInstructions}");
+		CanvasScript.SetNotificationBoxCloseText("Got it!");
+		CanvasScript.ShowNotificationBox();
+    }
 }

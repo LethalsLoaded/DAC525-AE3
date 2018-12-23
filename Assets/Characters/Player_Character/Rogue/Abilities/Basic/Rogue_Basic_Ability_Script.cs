@@ -46,14 +46,15 @@ public class Rogue_Basic_Ability_Script : Ability
             return;
         // TODO: play animation and sound
 
-        var venom = abilityOwner.GetComponent<Rogue_Script>().GetAbility("Envenom");
         var damage = (int) Random.Range(_minimumDamage, abilityValue + 1);
+        if(abilityOwner.GetComponent<Rogue_Script>().HasAbility("Envenom"))
+        {
+        var venom = abilityOwner.GetComponent<Rogue_Script>().GetAbility("Envenom");
         if (venom.isActive)
             damage += (int) venom.abilityValue;
+        }
 
         //test
         hit.collider.GetComponent<Entity>().Hit(damage, abilityOwner.GetComponent<Entity>());
-        Debug.Log(
-            $"Basic attack. Damaged {hit.collider.name} for {damage} {(venom.isActive ? "ENVENOMED" : "NO VENOM")}");
     }
 }

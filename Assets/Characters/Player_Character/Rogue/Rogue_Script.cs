@@ -26,10 +26,7 @@ public class Rogue_Script : Entity
         else if (_instance != this) Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-        
-        // Do stuff when entity is spawned
-        foreach (var ability in entityAbilities)
-            ability.abilityOwner = gameObject;
+
 
         if(GameLevel.GetActiveLevel() != null)
             GameObject.FindGameObjectWithTag("PLAYER").transform.position = GameLevel.GetActiveLevel().levelStartPoint;
@@ -40,6 +37,10 @@ public class Rogue_Script : Entity
     protected override void OnDeath(Entity entityKiller = null)
     {
         // Do stuff when killed (NOT DESTROYED!)
+
+        // TODO: Load some scene that you lost a life or some crap
+        GameManager.GetInstance().RemoveLife();
+        GameLevel.RestartLevel();
     }
 
     protected override void OnHit(Entity entityDamager)
@@ -72,7 +73,7 @@ public class Rogue_Script : Entity
 
     public void Attack()
     {
-        if (GetAbility("Stealth").isActive) // AND ENEMY IS X AWAY AND FACING RIGHT WAY
+        if (HasAbility("Stealth") && HasAbility("Backstab") && GetAbility("Stealth").isActive) // AND ENEMY IS X AWAY AND FACING RIGHT WAY
         {
             UseAbility(GetAbility("Backstab"));
             return;
@@ -95,13 +96,15 @@ public class Rogue_Script : Entity
     }
 
     // Necessary to execute 'OnSpawn()'
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         OnSpawn();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         // entityIsOnGround = Physics2D.Linecast(transform.position, transform.position + new Vector3(0, _rayLength, 0),
         //     1 << LayerMask.NameToLayer("Level_Layer"));
 

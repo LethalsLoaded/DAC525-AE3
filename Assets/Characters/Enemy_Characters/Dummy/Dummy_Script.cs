@@ -32,13 +32,15 @@ public class Dummy_Script : Entity
     }
 
     // Use this for initialization
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
     }
 
     // Update is called once per frame
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > 0.5f)
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.ClampMagnitude(gameObject.GetComponent<Rigidbody2D>().velocity, 0.5f);
     }

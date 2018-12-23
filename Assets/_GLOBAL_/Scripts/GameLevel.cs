@@ -67,10 +67,24 @@ public class GameLevel
 
     public static void NextLevel()
     {
+        // Increase our level index and load the next scene
         GameManager.GetInstance().levelIndex++;
         var nextLevel = GameManager.GetInstance().playableLevels[GameManager.GetInstance().levelIndex];
         SceneManager.LoadScene(nextLevel.GetSceneName());
-        var spawnPoint = GameObject.Find("PLAYER_SPAWN_POINT").transform.position;
-        GameObject.FindGameObjectWithTag("PLAYER").transform.position = spawnPoint;
+        
+        // Hide all the UI and move player to 0,0,0 as default point until game is ready to continue
+		GameManager.GetInstance().controlsUI.SetActive(false);
+		GameManager.GetInstance().playerCharacter.SetActive(false);
+		GameManager.GetInstance().playerCharacter.transform.position = Vector3.zero;
+        GameManager.GetInstance().playerCharacter.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+    }
+
+    public static void RestartLevel()
+    {
+        SceneManager.LoadScene(GetActiveLevel().GetSceneName());
+        GameManager.GetInstance().controlsUI.SetActive(false);
+		GameManager.GetInstance().playerCharacter.SetActive(false);
+		GameManager.GetInstance().playerCharacter.transform.position = Vector3.zero;
+        GameManager.GetInstance().playerCharacter.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
 }

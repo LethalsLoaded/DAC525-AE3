@@ -342,7 +342,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 90}
+  m_SizeDelta: {x: 250, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &439592488
 MonoBehaviour:
@@ -602,6 +602,16 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  _onNotificationClose:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _onNotificationOpen:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &490019486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,15 +627,28 @@ MonoBehaviour:
   startingLives: 3
   maxLives: 3
   playableLevels:
-  - levelName: ' Practice Normal Attacks'
+  - levelName: Practice Normal Attacks
     levelNumber: 1
     levelStartPoint: {x: -16, y: -8}
     sceneReference:
       scenePath: Assets/Levels/Levels_1_-_10/Level_1/Level_1.unity
       sceneAsset: {fileID: 102900000, guid: e94059063f4630349a11a5ba98c06201, type: 3}
+  - levelName: Stealth Ability
+    levelNumber: 2
+    levelStartPoint: {x: -16, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_1_-_10/Level_2/Level_2.unity
+      sceneAsset: {fileID: 102900000, guid: cea9d50545d9a5d4da3cb85b879cdd37, type: 3}
+  - levelName: Chest
+    levelNumber: 3
+    levelStartPoint: {x: -16, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_1_-_10/Level_3/Level_3.unity
+      sceneAsset: {fileID: 102900000, guid: 1b9db0182ddfc494b861c29946da510d, type: 3}
   notificationBoxUI: {fileID: 369618834}
   controlsUI: {fileID: 479830087}
   playerCharacter: {fileID: 1490242356}
+  playerEntity: {fileID: 0}
 --- !u!4 &490019487
 Transform:
   m_ObjectHideFlags: 0
@@ -646,11 +669,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 3798454}
     m_Modifications:
-    - target: {fileID: 114746685539620894, guid: 5b778560e53d32742aa1cec80a4f00e4,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 224526375330572826, guid: 5b778560e53d32742aa1cec80a4f00e4,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -746,38 +764,13 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3798455}
-    - target: {fileID: 114396314964765338, guid: 5b778560e53d32742aa1cec80a4f00e4,
-        type: 2}
-      propertyPath: m_PreserveAspect
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227826463920354, guid: 5b778560e53d32742aa1cec80a4f00e4, type: 2}
-      propertyPath: m_Name
-      value: Text_Padding
-      objectReference: {fileID: 0}
     - target: {fileID: 1977010230383602, guid: 5b778560e53d32742aa1cec80a4f00e4, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114746685539620894, guid: 5b778560e53d32742aa1cec80a4f00e4,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HideNotificationBoxNonStatic
-      objectReference: {fileID: 0}
-    - target: {fileID: 114746685539620894, guid: 5b778560e53d32742aa1cec80a4f00e4,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114746685539620894, guid: 5b778560e53d32742aa1cec80a4f00e4,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114746685539620894, guid: 5b778560e53d32742aa1cec80a4f00e4,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
+    - target: {fileID: 1058820919866748, guid: 5b778560e53d32742aa1cec80a4f00e4, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b778560e53d32742aa1cec80a4f00e4, type: 2}

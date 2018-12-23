@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     public GameObject notificationBoxUI;
     public GameObject controlsUI;
     public GameObject playerCharacter;
+    public Entity playerEntity;
 
     #endregion
 
@@ -96,9 +97,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void RemoveLife()
     {
-        if (lives == 0) return;
-
         lives--;
+        if(lives == 0)
+        {
+            // TODO: do some end game shit here
+        }
     }
 
     /// <summary>
@@ -125,12 +128,26 @@ public class GameManager : MonoBehaviour
         return instance;
     }
 
+    public static void PrepareLevel()
+    {
+        Debug.Log("Preparing level...");
+		GameManager.GetInstance().controlsUI.SetActive(true);
+		GameManager.GetInstance().playerCharacter.SetActive(true);
+
+		GameManager.GetInstance().playerCharacter.transform.position = GameLevel.GetActiveLevel().levelStartPoint;
+		InputManager.GetInstance()._onNotificationClose.RemoveAllListeners();
+        Debug.Log("Level prepared.");
+    
+    }
+
     public void Start()
     {
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        playerEntity = playerCharacter.GetComponent<Rogue_Script>();
     }
 
     #endregion

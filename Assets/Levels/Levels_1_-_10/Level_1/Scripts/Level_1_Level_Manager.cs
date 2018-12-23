@@ -12,11 +12,8 @@ public class Level_1_Level_Manager : MonoBehaviour
 		+ "Once all the enemies are dead, proceed to the door!");
 		CanvasScript.SetNotificationBoxCloseText("Roger that!");
 		CanvasScript.ShowNotificationBox();
-
-		GameManager.GetInstance().controlsUI.SetActive(true);
-		GameManager.GetInstance().playerCharacter.SetActive(true);
-
-		GameManager.GetInstance().playerCharacter.transform.position = GameLevel.GetActiveLevel().levelStartPoint;
+		
+		InputManager.GetInstance()._onNotificationClose.AddListener(GameManager.PrepareLevel);
 	}
 	
 	void Update ()

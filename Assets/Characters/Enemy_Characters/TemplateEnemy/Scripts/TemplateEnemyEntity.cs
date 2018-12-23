@@ -39,7 +39,7 @@ public class TemplateEnemyEntity : Entity
     }
 
     // Necessary to execute 'OnSpawn()'
-    private void Start()
+    protected override void Start()
     {
         OnSpawn();
     }

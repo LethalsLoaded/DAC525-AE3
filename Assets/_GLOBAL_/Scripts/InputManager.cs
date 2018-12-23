@@ -16,7 +16,9 @@ using UnityEngine.Events;
 
 public class InputManager : MonoBehaviour
 {
+    private static InputManager _instance;
     public UnityEvent _onSwipeUpEvent, _onSwipeDownEvent, _onSwipeRightEvent, _onSwipeLeftEvent;
+    public UnityEvent _onNotificationClose, _onNotificationOpen;
     private readonly IList<int> blacklist = new List<int>();
     public IList<int> touchesToTrack = new List<int>();
 
@@ -25,7 +27,11 @@ public class InputManager : MonoBehaviour
     {
         // Ensure that we have MT enabled.
         Input.multiTouchEnabled = true;
+        _instance = this;
     }
+
+    public static InputManager GetInstance()
+        => _instance;
 
     private void Update()
     {
@@ -65,24 +71,5 @@ public class InputManager : MonoBehaviour
 
         foreach (var i in Input.touches.Where(x => x.phase == TouchPhase.Ended))
             blacklist.Remove(i.fingerId);
-
-        // foreach(var i in Input.touches.Where(x=> touchesToTrack.Contains(x.fingerId) && x.phase == TouchPhase.Ended))
-        // {
-        //     switch(i.GetSwipeDirection())
-        //     {
-        //         case TouchHandler.directions.Up:
-        //         _onSwipeUpEvent.Invoke();
-        //         break;
-        //         case TouchHandler.directions.Down:
-        //         _onSwipeDownEvent.Invoke();
-        //         break;
-        //         case TouchHandler.directions.Left:
-        //         _onSwipeLeftEvent.Invoke();
-        //         break;
-        //         case TouchHandler.directions.Right:
-        //         _onSwipeRightEvent.Invoke();
-        //         break;
-        //     }
-        // }
     }
 }

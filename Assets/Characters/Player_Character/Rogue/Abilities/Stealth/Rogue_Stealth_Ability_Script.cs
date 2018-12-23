@@ -24,8 +24,29 @@ public class Rogue_Stealth_Ability_Script : Ability
 
     public override void Update()
     {
-        Debug.Log($"{isActive}");
-        //Debug.Log($"{abilityName} ({isActive}) | Pos: " + abilityOwner.transform.position);
+        if(!isActive) return;
+
+        // Check Right
+        var hit = Physics2D.Raycast(abilityOwner.transform.position, abilityOwner.transform.right, maxDistanceToEnemy);
+        if(hit && hit.collider.tag == "ENTITY")
+            EnemyDetectedTooClose(hit.collider);
+        else
+        {
+            // Check Left
+            hit = Physics2D.Raycast(abilityOwner.transform.position, -abilityOwner.transform.right, maxDistanceToEnemy);
+            if(hit && hit.collider.tag == "ENTITY")
+                EnemyDetectedTooClose(hit.collider);
+        }
+    }
+
+    public void EnemyDetectedTooClose(Collider2D collider)
+    {
+        Debug.Log("No longer stealthy boy");
+        isActive = false;
+        var colora = abilityOwner.GetComponent<SpriteRenderer>().color;
+        colora.a = 1f;
+        abilityOwner.GetComponent<SpriteRenderer>().color = colora;
+        abilityOwner.layer = 0;
     }
 
     public override void Use()
@@ -37,6 +58,7 @@ public class Rogue_Stealth_Ability_Script : Ability
         var colora = abilityOwner.GetComponent<SpriteRenderer>().color;
         colora.a = isActive ? 0.5f : 1f;
         abilityOwner.GetComponent<SpriteRenderer>().color = colora;
+        abilityOwner.layer = isActive ? 2 : 0;
 
         Debug.Log(isActive ? "Stealthed" : "Unstealthed");
 

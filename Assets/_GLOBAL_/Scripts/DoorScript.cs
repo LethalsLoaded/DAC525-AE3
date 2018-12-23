@@ -22,7 +22,6 @@ public class DoorScript : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collider)
     {
         if (!_isDoorOpen) return; //Print message saying do X to open door?
-        Debug.Log("Load next level.");
         GameLevel.NextLevel();
     }
 }

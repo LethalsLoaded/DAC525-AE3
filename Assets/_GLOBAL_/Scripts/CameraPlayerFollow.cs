@@ -37,6 +37,7 @@ public class CameraPlayerFollow : MonoBehaviour
     {
         startPosition = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
         maxPosition = new Vector2(xMost, yMost);
+        Camera.main.transform.position = Vector2.zero;
 
         objectToFollow = GameManager.GetInstance().playerCharacter;
     }
