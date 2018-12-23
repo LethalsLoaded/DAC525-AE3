@@ -9,6 +9,7 @@ TagManager:
   - PLAYER
   - DOOR
   - CANVAS
+  - KEY_DOOR
   layers:
   - Default
   - TransparentFX

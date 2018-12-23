@@ -8,6 +8,8 @@
  * NAME, DATE OF EDIT, CONTENT EDITED:
  */
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Rogue_Script : Entity
@@ -15,6 +17,8 @@ public class Rogue_Script : Entity
     private bool _moveLeft;
     private bool _moveRight;
     public float _rayLength = 1;
+
+    private bool _lockpicking = false;
 
     public bool inCombat = false;
 
@@ -46,6 +50,8 @@ public class Rogue_Script : Entity
     protected override void OnHit(Entity entityDamager)
     {
         // Do stuff when hit by entityDamager
+        StartCoroutine(Blink());
+        StopCoroutine(LockpickCountdown());
     }
 
     protected override void OnInteraction(Entity entityInteracter)
@@ -102,11 +108,37 @@ public class Rogue_Script : Entity
         OnSpawn();
     }
 
+    private IEnumerator LockpickCountdown()
+    {
+        Debug.Log("owo");
+        _lockpicking = true;
+        var lockpick = GetAbility("Lockpick");
+        bool stop = false;
+        for(var i = 0; i < lockpick.abilityValue * 2; i++)
+        {
+            if(gameObject.GetComponent<Rigidbody2D>().velocity != Vector2.zero) stop = true;
+            if(stop) break;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        if(stop)
+        {
+            _lockpicking = false;
+        }
+        else
+        {
+            lockpick.Use();
+        }
+    }
+
     protected override void Update()
     {
         base.Update();
         // entityIsOnGround = Physics2D.Linecast(transform.position, transform.position + new Vector3(0, _rayLength, 0),
         //     1 << LayerMask.NameToLayer("Level_Layer"));
+
+        // ********* MOVEMENT STUFF ************** //
 
         entityIsOnGround = Physics2D.Raycast(transform.position, -transform.up, _rayLength, 1 << LayerMask.NameToLayer("Land"));
         Debug.DrawRay(transform.position, -transform.up, Color.gray);
@@ -117,8 +149,22 @@ public class Rogue_Script : Entity
         else if (!_moveRight && _moveLeft)
             GetComponent<Rigidbody2D>().velocity =
                 new Vector2(-1 * entitySpeed, GetComponent<Rigidbody2D>().velocity.y);
-
         else
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+
+        // ********* LOCKPICK STUFF ************** //
+
+        if(HasAbility("Lockpick") && GetComponent<Rigidbody2D>().velocity == Vector2.zero)
+        {
+            var hit = Physics2D.Raycast(transform.position, transform.right, 1.0f);
+            if(hit && hit.collider.tag == "KEY_DOOR")
+                StartCoroutine(LockpickCountdown());
+            else
+            {
+                hit = Physics2D.Raycast(transform.position, -transform.right, 1.0f);
+                if(hit && hit.collider.tag == "KEY_DOOR")                
+                    StartCoroutine(LockpickCountdown());
+            }
+        }
     }
 }
