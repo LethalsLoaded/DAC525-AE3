@@ -22,5 +22,56 @@ EditorBuildSettings:
     guid: 1a88a55f10ab1c24d938e3d891e6cd00
   - enabled: 1
     path: Assets/Levels/Levels_1_-_10/Level_5/Level_5.unity
+    guid: c04b6047dc577ab4ba8c538b0616ff4e
+  - enabled: 1
+    path: Assets/Levels/Levels_1_-_10/Level_6/Level_6.unity
+    guid: 1addd7bb8b211264ea7d11c65c5e8815
+  - enabled: 1
+    path: Assets/Levels/Levels_1_-_10/Level_7/Level_7.unity
+    guid: 5b53ac7f97a9faa419f9a823071891d2
+  - enabled: 1
+    path: Assets/Levels/Levels_1_-_10/Level_8/Level_8.unity
     guid: 13262361cae4f5e4199c463e83307678
+  - enabled: 1
+    path: Assets/Levels/Levels_1_-_10/Level_9/Level_9.unity
+    guid: c99df5818a847794496403f8bf7075c6
+  - enabled: 1
+    path: Assets/Levels/Levels_1_-_10/Level_10/Level_10.unity
+    guid: a0c421deeed83d841a336ed47a03a565
+  - enabled: 1
+    path: Assets/Levels/Levels_11_-_20/Level_11/Level_11.unity
+    guid: c9cdaa3b5e4fc2144a475839b6df62a6
+  - enabled: 1
+    path: Assets/Levels/Levels_11_-_20/Level_12/Level_12.unity
+    guid: 0a1ba0419ef34ed4fb5289344e67cde7
+  - enabled: 1
+    path: Assets/Levels/Levels_11_-_20/Level_13/Level_13.unity
+    guid: 8829f8f3e50151f40b00519cc60dd35d
+  - enabled: 1
+    path: Assets/Levels/Levels_11_-_20/Level_14/Level_14.unity
+    guid: f8b0d64df4c979f43a44fb94c16b3c18
+  - enabled: 1
+    path: Assets/Levels/Levels_11_-_20/Level_15/Level_15.unity
+    guid: e983ea578abfc44418adaa1d6fdf4861
+  - enabled: 1
+    path: Assets/Levels/Levels_11_-_20/Level_16/Level_16.unity
+    guid: 68a198a07a5cfcc4ca92acfb33dab3e8
+  - enabled: 1
+    path: Assets/Levels/Levels_11_-_20/Level_17/Level_17.unity
+    guid: ba715020befdff44aa11ceccbcfd727a
+  - enabled: 1
+    path: Assets/Levels/Levels_11_-_20/Level_18/Level_18.unity
+    guid: d095779953389e543b8e24c4a48d6271
+  - enabled: 1
+    path: Assets/Levels/Levels_11_-_20/Level_19/Level_19.unity
+    guid: 5e3e0451ce6486647ba00526aa904d4e
+  - enabled: 1
+    path: Assets/Levels/Levels_11_-_20/Level_20/Level_20.unity
+    guid: 198bf6878f0dae64bbb2f5f143dc66af
+  - enabled: 1
+    path: Assets/Levels/Levels_21_-_30/Level_21/Level_21.unity
+    guid: f43618bce84488149897d75a09632779
+  - enabled: 1
+    path: Assets/Levels/Levels_21_-_30/Level_22/Level_22.unity
+    guid: c6b0cf1eddf250d47bf083400c0b6a4d
   m_configObjects: {}

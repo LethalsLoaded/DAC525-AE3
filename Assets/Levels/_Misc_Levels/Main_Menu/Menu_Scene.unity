@@ -300,6 +300,11 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 1bb9234892a3fa64a8170f2abfc5159f,
         type: 2}
+    - target: {fileID: 114962669332711650, guid: 17ae3b7c27f95ee44af512681b193c52,
+        type: 2}
+      propertyPath: entityJumpStrength
+      value: 290
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
   m_IsPrefabAsset: 0
@@ -629,34 +634,136 @@ MonoBehaviour:
   playableLevels:
   - levelName: Practice Normal Attacks
     levelNumber: 1
-    levelStartPoint: {x: -16, y: -8}
+    levelStartPoint: {x: -21, y: -8}
     sceneReference:
-      scenePath: Assets/Levels/Levels_1_-_10/Level_5/Level_5.unity
-      sceneAsset: {fileID: 102900000, guid: 13262361cae4f5e4199c463e83307678, type: 3}
+      scenePath: Assets/Levels/Levels_1_-_10/Level_1/Level_1.unity
+      sceneAsset: {fileID: 102900000, guid: e94059063f4630349a11a5ba98c06201, type: 3}
   - levelName: Stealth Ability
     levelNumber: 2
-    levelStartPoint: {x: -16, y: -8}
+    levelStartPoint: {x: -21, y: -8}
     sceneReference:
       scenePath: Assets/Levels/Levels_1_-_10/Level_2/Level_2.unity
       sceneAsset: {fileID: 102900000, guid: cea9d50545d9a5d4da3cb85b879cdd37, type: 3}
   - levelName: Chest
     levelNumber: 3
-    levelStartPoint: {x: -16, y: -8}
+    levelStartPoint: {x: -21, y: -8}
     sceneReference:
       scenePath: Assets/Levels/Levels_1_-_10/Level_3/Level_3.unity
       sceneAsset: {fileID: 102900000, guid: 1b9db0182ddfc494b861c29946da510d, type: 3}
   - levelName: Door & Key
     levelNumber: 4
-    levelStartPoint: {x: -16, y: -8}
+    levelStartPoint: {x: -21, y: -8}
     sceneReference:
       scenePath: Assets/Levels/Levels_1_-_10/Level_4/Level_4.unity
       sceneAsset: {fileID: 102900000, guid: 1a88a55f10ab1c24d938e3d891e6cd00, type: 3}
-  - levelName: Lockpick Ability
-    levelNumber: 8
-    levelStartPoint: {x: -16, y: -8}
+  - levelName: Patrolling enemy
+    levelNumber: 5
+    levelStartPoint: {x: -21, y: -8}
     sceneReference:
       scenePath: Assets/Levels/Levels_1_-_10/Level_5/Level_5.unity
+      sceneAsset: {fileID: 102900000, guid: c04b6047dc577ab4ba8c538b0616ff4e, type: 3}
+  - levelName: Steps of Flame
+    levelNumber: 6
+    levelStartPoint: {x: -21, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_1_-_10/Level_6/Level_6.unity
+      sceneAsset: {fileID: 102900000, guid: 1addd7bb8b211264ea7d11c65c5e8815, type: 3}
+  - levelName: Platforms
+    levelNumber: 7
+    levelStartPoint: {x: -21, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_1_-_10/Level_7/Level_7.unity
+      sceneAsset: {fileID: 102900000, guid: 5b53ac7f97a9faa419f9a823071891d2, type: 3}
+  - levelName: Class Ability 2
+    levelNumber: 8
+    levelStartPoint: {x: -21, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_1_-_10/Level_8/Level_8.unity
       sceneAsset: {fileID: 102900000, guid: 13262361cae4f5e4199c463e83307678, type: 3}
+  - levelName: Bouncy
+    levelNumber: 9
+    levelStartPoint: {x: -18, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_1_-_10/Level_9/Level_9.unity
+      sceneAsset: {fileID: 102900000, guid: c99df5818a847794496403f8bf7075c6, type: 3}
+  - levelName: It's Collapsing
+    levelNumber: 10
+    levelStartPoint: {x: 10, y: 6}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_1_-_10/Level_10/Level_10.unity
+      sceneAsset: {fileID: 102900000, guid: a0c421deeed83d841a336ed47a03a565, type: 3}
+  - levelName: Vanishing Tiles & Portals
+    levelNumber: 11
+    levelStartPoint: {x: -21, y: -6}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_11_-_20/Level_11/Level_11.unity
+      sceneAsset: {fileID: 102900000, guid: c9cdaa3b5e4fc2144a475839b6df62a6, type: 3}
+  - levelName: Arrow Traps
+    levelNumber: 12
+    levelStartPoint: {x: -21, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_11_-_20/Level_12/Level_12.unity
+      sceneAsset: {fileID: 102900000, guid: 0a1ba0419ef34ed4fb5289344e67cde7, type: 3}
+  - levelName: Circular Patroller
+    levelNumber: 13
+    levelStartPoint: {x: -20, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_11_-_20/Level_13/Level_13.unity
+      sceneAsset: {fileID: 102900000, guid: 8829f8f3e50151f40b00519cc60dd35d, type: 3}
+  - levelName: Class Ability 3
+    levelNumber: 14
+    levelStartPoint: {x: -21, y: -1}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_11_-_20/Level_14/Level_14.unity
+      sceneAsset: {fileID: 102900000, guid: f8b0d64df4c979f43a44fb94c16b3c18, type: 3}
+  - levelName: Destructible Objects
+    levelNumber: 15
+    levelStartPoint: {x: -21, y: -1}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_11_-_20/Level_15/Level_15.unity
+      sceneAsset: {fileID: 102900000, guid: e983ea578abfc44418adaa1d6fdf4861, type: 3}
+  - levelName: Ranged Enemies
+    levelNumber: 16
+    levelStartPoint: {x: -21, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_11_-_20/Level_16/Level_16.unity
+      sceneAsset: {fileID: 102900000, guid: 68a198a07a5cfcc4ca92acfb33dab3e8, type: 3}
+  - levelName: Boulders
+    levelNumber: 17
+    levelStartPoint: {x: -21, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_11_-_20/Level_17/Level_17.unity
+      sceneAsset: {fileID: 102900000, guid: ba715020befdff44aa11ceccbcfd727a, type: 3}
+  - levelName: Sequence Puzzle
+    levelNumber: 18
+    levelStartPoint: {x: -21, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_11_-_20/Level_18/Level_18.unity
+      sceneAsset: {fileID: 102900000, guid: d095779953389e543b8e24c4a48d6271, type: 3}
+  - levelName: Arc Attack
+    levelNumber: 19
+    levelStartPoint: {x: -21, y: 0}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_11_-_20/Level_19/Level_19.unity
+      sceneAsset: {fileID: 102900000, guid: 5e3e0451ce6486647ba00526aa904d4e, type: 3}
+  - levelName: Roomception
+    levelNumber: 20
+    levelStartPoint: {x: -21, y: -3}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_11_-_20/Level_20/Level_20.unity
+      sceneAsset: {fileID: 102900000, guid: 198bf6878f0dae64bbb2f5f143dc66af, type: 3}
+  - levelName: Ghosts
+    levelNumber: 21
+    levelStartPoint: {x: -21, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_21_-_30/Level_21/Level_21.unity
+      sceneAsset: {fileID: 102900000, guid: f43618bce84488149897d75a09632779, type: 3}
+  - levelName: Class Ability 4
+    levelNumber: 22
+    levelStartPoint: {x: -21, y: -8}
+    sceneReference:
+      scenePath: Assets/Levels/Levels_21_-_30/Level_22/Level_22.unity
+      sceneAsset: {fileID: 102900000, guid: c6b0cf1eddf250d47bf083400c0b6a4d, type: 3}
   notificationBoxUI: {fileID: 369618834}
   controlsUI: {fileID: 479830087}
   playerCharacter: {fileID: 1490242356}

@@ -12,16 +12,15 @@ using UnityEngine;
 
 public abstract class Ability : ScriptableObject
 {
-    public Animation abilityAnimation;
-    public string abilityDescription;
-    public string abilityInstructions;
-
     [Header("- Ability Information -")] public string abilityName;
 
     public GameObject abilityOwner;
+    public string abilityDescription;
+    public string abilityInstructions;
 
     [Header("- Ability Variables -")] [Tooltip("The object that will be spawned if appropiate.")]
     public GameObject abilityPrefab;
+    public Animation abilityAnimation;
 
     [Tooltip(
         "The amount the ability will do.\nFor example:\n  It will heal for abilityValue.\n  It will damage for abilityValue.")]
@@ -42,7 +41,7 @@ public abstract class Ability : ScriptableObject
     {
         InputManager.GetInstance()._onNotificationClose.RemoveAllListeners();
         CanvasScript.SetNotificationBoxTitle($"<b>New ability\nunlocked!</b>");
-		CanvasScript.SetNotificationBoxText($"<b>{ability.abilityName}\n\n{ability.abilityDescription}\n\n{ability.abilityInstructions}");
+		CanvasScript.SetNotificationBoxText($"<b>{ability.abilityName}</b>\n\n{ability.abilityDescription}\n\n{ability.abilityInstructions}");
 		CanvasScript.SetNotificationBoxCloseText("Got it!");
 		CanvasScript.ShowNotificationBox();
     }
