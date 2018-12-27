@@ -20,7 +20,6 @@ public class InputManager : MonoBehaviour
     public UnityEvent _onSwipeUpEvent, _onSwipeDownEvent, _onSwipeRightEvent, _onSwipeLeftEvent;
     public UnityEvent _onNotificationClose, _onNotificationOpen;
     private readonly IList<int> blacklist = new List<int>();
-    public IList<int> touchesToTrack = new List<int>();
 
 
     private void Start()

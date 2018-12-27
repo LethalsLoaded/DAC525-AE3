@@ -636,8 +636,8 @@ MonoBehaviour:
     levelNumber: 1
     levelStartPoint: {x: -21, y: -8}
     sceneReference:
-      scenePath: Assets/Levels/Levels_1_-_10/Level_1/Level_1.unity
-      sceneAsset: {fileID: 102900000, guid: e94059063f4630349a11a5ba98c06201, type: 3}
+      scenePath: Assets/Levels/Levels_1_-_10/Level_9/Level_9.unity
+      sceneAsset: {fileID: 102900000, guid: c99df5818a847794496403f8bf7075c6, type: 3}
   - levelName: Stealth Ability
     levelNumber: 2
     levelStartPoint: {x: -21, y: -8}

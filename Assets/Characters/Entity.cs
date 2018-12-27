@@ -51,22 +51,23 @@ public abstract class Entity : MonoBehaviour
     public DropsDictionary[] entityDrops;
     public Direction entityFacingDirection = Direction.EAST;
 
-    [Header("- Entity Stats -")] public int entityHitPoints = 5;
+    [Header("- Entity Stats -")]
+    public int entityHitPoints = 5;
+    public float entitySpeed = 5.0f;
+    public float entityJumpStrength = 1.0f;
 
     [Header("- Entity Toggable Variables -")]
-    public bool entityIsInteractable = false;
-
+    public bool entityIsInteractable;
     public bool entityIsOnGround;
-    public float entityJumpStrength = 1.0f;
-    public int entityMaxHitPoints = 5;
-    public float entityMaxSpeed = 5.0f;
-
-    [Header("- Entity Info -")] public string entityName;
-
-    public float entitySpeed = 5.0f;
-    public EntityType entityType;
     public bool isDead;
     public bool isPlayer;
+
+    [Header("- Entity Info -")]
+    public string entityName;
+    public int entityMaxHitPoints = 5;
+    public float entityMaxSpeed = 5.0f;
+    public EntityType entityType;
+
 
     protected virtual void Start()
     {

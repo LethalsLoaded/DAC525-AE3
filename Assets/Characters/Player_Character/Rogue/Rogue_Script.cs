@@ -11,9 +11,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Rogue_Script : Entity
 {
+    public UnityEvent onJump;
     private bool _moveLeft;
     private bool _moveRight;
     public float _rayLength = 1;
@@ -75,6 +77,7 @@ public class Rogue_Script : Entity
     {
         //if(isInTheAir && blink is not active) UseAbility(GetAbility"Blink");
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, entityJumpStrength));
+        onJump.Invoke();
     }
 
     public void Attack()

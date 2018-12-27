@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 437952374}
   - component: {fileID: 437952373}
   - component: {fileID: 437952372}
-  m_Layer: 31
+  m_Layer: 9
   m_Name: Outer_Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9976,7 +9976,7 @@ GameObject:
   - component: {fileID: 577522714}
   - component: {fileID: 577522713}
   - component: {fileID: 577522712}
-  m_Layer: 31
+  m_Layer: 9
   m_Name: Platform_Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11188,7 +11188,7 @@ GameObject:
   - component: {fileID: 1278373068}
   - component: {fileID: 1278373067}
   - component: {fileID: 1278373066}
-  m_Layer: 31
+  m_Layer: 9
   m_Name: Solid_Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
