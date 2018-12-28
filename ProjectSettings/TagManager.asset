@@ -11,6 +11,9 @@ TagManager:
   - CANVAS
   - KEY_DOOR
   - INTERACTABLE
+  - TILE_OUTER
+  - TILE_SOLID
+  - TILE_PLATFORM
   layers:
   - Default
   - TransparentFX
