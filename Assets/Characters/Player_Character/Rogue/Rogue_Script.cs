@@ -15,10 +15,11 @@ using UnityEngine.Events;
 
 public class Rogue_Script : Entity
 {
-    public UnityEvent onJump;
+    public UnityEvent onJump, onInteract;
     private bool _moveLeft;
     private bool _moveRight;
     public float _rayLength = 1;
+    private bool _canInteract;
 
     private bool _lockpicking = false;
 
@@ -75,6 +76,12 @@ public class Rogue_Script : Entity
 
     public void Jump()
     {
+        if(_canInteract)
+        {
+            onInteract.Invoke();
+            return;
+        }
+
         //if(isInTheAir && blink is not active) UseAbility(GetAbility"Blink");
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, entityJumpStrength));
         onJump.Invoke();
@@ -169,5 +176,20 @@ public class Rogue_Script : Entity
                     StartCoroutine(LockpickCountdown());
             }
         }
+    }
+
+    public void OnTriggerStay2D(Collider2D collider)
+    {
+        if(collider.tag != "INTERACTABLE") return;
+        _canInteract = true;
+        // TODO: Change UI icon/button?
+        Debug.Log("Can interact");
+    }
+
+    public void OnTriggerExit2D(Collider2D collider)
+    {
+        if(collider.tag != "INTERACTABLE") return;
+        _canInteract = false;
+        Debug.Log("Cant interact");
     }
 }

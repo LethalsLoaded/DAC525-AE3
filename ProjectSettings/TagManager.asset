@@ -10,6 +10,7 @@ TagManager:
   - DOOR
   - CANVAS
   - KEY_DOOR
+  - INTERACTABLE
   layers:
   - Default
   - TransparentFX
