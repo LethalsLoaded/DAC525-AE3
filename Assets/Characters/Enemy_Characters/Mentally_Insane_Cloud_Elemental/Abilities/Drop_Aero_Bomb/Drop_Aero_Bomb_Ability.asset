@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95cd0b470f635040bbc932e72eaad9c, type: 3}
+  m_Name: Drop_Aero_Bomb_Ability
+  m_EditorClassIdentifier: 
+  abilityName: Drop Aero Bomb
+  abilityOwner: {fileID: 0}
+  abilityDescription: abc
+  abilityInstructions: def
+  abilityPrefab: {fileID: 1273988743397704, guid: bfde6d3674ab4a744a27b4155abe12b9,
+    type: 2}
+  abilityAnimation: {fileID: 0}
+  abilityValue: 5
+  cooldownPeriod: 0
+  isActive: 0
+  amountToSpawn: 2
+  minimumThrust: {x: -5, y: 3}
+  maximumThrust: {x: 5, y: 5}
