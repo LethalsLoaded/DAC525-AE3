@@ -13,7 +13,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Rogue_Basic_Ability", menuName = "Character_Abilities/Rogue/Basic", order = 1)]
 public class Rogue_Basic_Ability_Script : Ability
 {
-    public float _distanceToHit = 1.0f;
+    public float distanceToHit = 1.0f;
 
     public int _minimumDamage = 1;
 
@@ -38,7 +38,7 @@ public class Rogue_Basic_Ability_Script : Ability
 
         Debug.Log(direction);
         Debug.DrawRay(abilityOwner.transform.position, direction, Color.red, 2.0f, false);
-        var hit = Physics2D.Raycast(abilityOwner.transform.position, direction, 10.0f);
+        var hit = Physics2D.Raycast(abilityOwner.transform.position, direction, distanceToHit);
 
         if (!hit
             || hit.collider.tag != "ENTITY"

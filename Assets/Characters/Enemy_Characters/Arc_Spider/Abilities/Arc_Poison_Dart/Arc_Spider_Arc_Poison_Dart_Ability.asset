@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad069db63ef20ca42a369a8b0d6e040c, type: 3}
+  m_Name: Arc_Spider_Arc_Poison_Dart_Ability
+  m_EditorClassIdentifier: 
+  abilityName: Arc Poison Dart
+  abilityOwner: {fileID: 0}
+  abilityDescription: abc
+  abilityInstructions: def
+  abilityPrefab: {fileID: 1396786959093964, guid: 995eccaee7c9f4746a3b97616dfff6bf,
+    type: 2}
+  abilityAnimation: {fileID: 0}
+  abilityValue: 0
+  cooldownPeriod: 0
+  isActive: 0
+  xStrength: 4
+  yStrength: 1
+  amountToSpawn: 3
