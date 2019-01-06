@@ -76,6 +76,10 @@ public class GameLevel
 		GameManager.GetInstance().controlsUI.SetActive(false);
 		GameManager.GetInstance().playerCharacter.SetActive(false);
 		GameManager.GetInstance().playerCharacter.transform.position = Vector3.zero;
+
+        GameManager.GetInstance().playerCharacter.GetComponent<Rogue_Script>()._moveRight = false;
+        GameManager.GetInstance().playerCharacter.GetComponent<Rogue_Script>()._moveLeft = false;
+
         GameManager.GetInstance().playerCharacter.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
 

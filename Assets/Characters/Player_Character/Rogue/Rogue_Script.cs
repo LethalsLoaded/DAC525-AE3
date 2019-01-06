@@ -16,8 +16,8 @@ using UnityEngine.Events;
 public class Rogue_Script : Entity
 {
     public UnityEvent onJump, onInteract;
-    private bool _moveLeft;
-    private bool _moveRight;
+    public bool _moveLeft;
+    public bool _moveRight;
     public float _rayLength = 1;
     private bool _canInteract;
 
