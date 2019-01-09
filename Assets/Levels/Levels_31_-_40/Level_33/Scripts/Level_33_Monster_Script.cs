@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Level_33_Monster_Script : MonoBehaviour {
 
-	GameObject player;
+	public Transform target;
 	//Transform target;
 	// Use this for initialization
 	void Start ()
 	{
-		player = GameObject.FindGameObjectWithTag("PLAYER");
+		target = GameObject.FindGameObjectWithTag("PLAYER").transform;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
 		//transform.LookAt(target);
-		transform.right = player.transform.position - transform.position;
+		transform.right = target.position - transform.position;
 	}
 }

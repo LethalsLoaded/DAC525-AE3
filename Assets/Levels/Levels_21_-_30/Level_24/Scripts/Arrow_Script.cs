@@ -20,4 +20,10 @@ public class Arrow_Script : MonoBehaviour {
 		if (gameObject.transform.position.x > 40)
 		Destroy(this.gameObject);
 	}
+
+	void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.isTrigger && col.tag == "PLAYER")
+        GameManager.GetInstance().playerEntity.Hit(1, null);
+    }
 }

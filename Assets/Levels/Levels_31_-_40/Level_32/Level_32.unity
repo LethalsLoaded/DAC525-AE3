@@ -446,8 +446,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689aa86655557324b84d9037dd9cccc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityAbilities:
+  - {fileID: 11400000, guid: 2c41789c22bc49b4987cfbdc7921d45c, type: 2}
+  entityDescription: 
+  entityDrops: []
+  entityFacingDirection: 2
+  entityHitPoints: 14
+  entitySpeed: -8
+  entityJumpStrength: 0
+  entityIsInteractable: 0
+  entityIsOnGround: 0
+  isDead: 0
+  isPlayer: 0
+  entityName: Chaser
+  entityMaxHitPoints: 14
+  entityMaxSpeed: 8
+  entityType: 0
   rayLenght: -10
-  speed: -5
   isChasing: 0
 --- !u!212 &573869509
 SpriteRenderer:
@@ -758,7 +773,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 692895574}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.39, y: -0.58, z: 0}
+  m_LocalPosition: {x: -4.02, y: -0.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 649830922}
@@ -935,7 +950,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 789609977}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.41, y: -0.55, z: 0}
+  m_LocalPosition: {x: 13.31, y: -0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 649830922}
@@ -1035,7 +1050,8 @@ SpriteRenderer:
 --- !u!1 &924422655
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1341094576084008, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -1053,7 +1069,8 @@ GameObject:
 --- !u!212 &924422656
 SpriteRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 212792900236388134, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 924422655}
   m_Enabled: 0
@@ -1099,7 +1116,8 @@ SpriteRenderer:
 --- !u!4 &924422657
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4377244168247484, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 924422655}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -1112,7 +1130,8 @@ Transform:
 --- !u!61 &924422658
 BoxCollider2D:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 61584417669554788, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 924422655}
   m_Enabled: 1
@@ -1138,7 +1157,8 @@ BoxCollider2D:
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 50101077813384630, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 924422655}
   m_BodyType: 1
@@ -1157,7 +1177,8 @@ Rigidbody2D:
 --- !u!1 &940465400
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1552541812998804, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -1172,7 +1193,8 @@ GameObject:
 --- !u!4 &940465401
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4278741062524028, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 940465400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -1735,8 +1757,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689aa86655557324b84d9037dd9cccc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityAbilities:
+  - {fileID: 11400000, guid: 2c41789c22bc49b4987cfbdc7921d45c, type: 2}
+  entityDescription: 
+  entityDrops: []
+  entityFacingDirection: 2
+  entityHitPoints: 14
+  entitySpeed: 8
+  entityJumpStrength: 0
+  entityIsInteractable: 0
+  entityIsOnGround: 0
+  isDead: 0
+  isPlayer: 0
+  entityName: Chaser
+  entityMaxHitPoints: 14
+  entityMaxSpeed: 8
+  entityType: 0
   rayLenght: 10
-  speed: 5
   isChasing: 0
 --- !u!212 &1505871913
 SpriteRenderer:
@@ -13434,7 +13471,8 @@ SpriteRenderer:
 --- !u!1 &1824276451
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1488783416819030, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -13453,7 +13491,8 @@ GameObject:
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 50531335012621600, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1824276451}
   m_BodyType: 1
@@ -13472,7 +13511,8 @@ Rigidbody2D:
 --- !u!61 &1824276453
 BoxCollider2D:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 61828951983195806, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1824276451}
   m_Enabled: 1
@@ -13497,7 +13537,8 @@ BoxCollider2D:
 --- !u!212 &1824276454
 SpriteRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 212666411044151278, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1824276451}
   m_Enabled: 0
@@ -13543,7 +13584,8 @@ SpriteRenderer:
 --- !u!4 &1824276455
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4009429156998298, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1824276451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -13786,7 +13828,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2111547621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.95, y: -0.51, z: 0}
+  m_LocalPosition: {x: 9.93, y: -0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 649830922}
@@ -13848,8 +13890,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689aa86655557324b84d9037dd9cccc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayLenght: 13
-  speed: 5
+  entityAbilities:
+  - {fileID: 11400000, guid: 2c41789c22bc49b4987cfbdc7921d45c, type: 2}
+  entityDescription: 
+  entityDrops: []
+  entityFacingDirection: 2
+  entityHitPoints: 14
+  entitySpeed: -8
+  entityJumpStrength: 0
+  entityIsInteractable: 0
+  entityIsOnGround: 0
+  isDead: 0
+  isPlayer: 0
+  entityName: Chaser
+  entityMaxHitPoints: 14
+  entityMaxSpeed: 8
+  entityType: 0
+  rayLenght: -15
   isChasing: 0
 --- !u!212 &2111547626
 SpriteRenderer:
@@ -13900,7 +13957,8 @@ SpriteRenderer:
 --- !u!1 &2134913364
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1752157443136572, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -13919,7 +13977,8 @@ GameObject:
 --- !u!212 &2134913365
 SpriteRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 212182948393989564, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2134913364}
   m_Enabled: 1
@@ -13965,7 +14024,8 @@ SpriteRenderer:
 --- !u!4 &2134913366
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4278119824048330, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2134913364}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -13978,7 +14038,8 @@ Transform:
 --- !u!114 &2134913367
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 114296040723440756, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2134913364}
   m_Enabled: 1
@@ -13986,14 +14047,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689aa86655557324b84d9037dd9cccc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityAbilities:
+  - {fileID: 11400000, guid: 2c41789c22bc49b4987cfbdc7921d45c, type: 2}
+  entityDescription: 
+  entityDrops: []
+  entityFacingDirection: 2
+  entityHitPoints: 14
+  entitySpeed: -8
+  entityJumpStrength: 0
+  entityIsInteractable: 0
+  entityIsOnGround: 0
+  isDead: 0
+  isPlayer: 0
+  entityName: Chaser
+  entityMaxHitPoints: 14
+  entityMaxSpeed: 8
+  entityType: 0
   rayLenght: -12
-  speed: -5
   isChasing: 0
 --- !u!50 &2134913368
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 50880214072110776, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2134913364}
   m_BodyType: 0
@@ -14012,7 +14089,8 @@ Rigidbody2D:
 --- !u!61 &2134913369
 BoxCollider2D:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 61025213962803588, guid: bbf8247b3bcd2e94195c5d577168bdad,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2134913364}
   m_Enabled: 1

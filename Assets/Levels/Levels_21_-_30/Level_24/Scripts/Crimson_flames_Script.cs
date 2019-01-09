@@ -15,8 +15,11 @@ public class Crimson_flames_Script : MonoBehaviour {
 		rb = gameObject.GetComponent<Rigidbody2D>();
 		shoot = true;
 	}
-	
-	// Update is called once per frame
+	void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.isTrigger && col.tag == "PLAYER")
+        GameManager.GetInstance().playerEntity.Hit(1, null);
+    }
 	void Update () 
 	{
 		if (rb.velocity.y == 0 && shoot)

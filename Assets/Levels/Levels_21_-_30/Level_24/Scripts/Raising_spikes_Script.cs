@@ -14,12 +14,11 @@ public class Raising_spikes_Script : MonoBehaviour {
 		StartCoroutine (RiseSpikes());   
 		myCollider = gameObject.GetComponent<BoxCollider2D>();
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
+	void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.isTrigger && col.tag == "PLAYER")
+        GameManager.GetInstance().playerEntity.Hit(1, null);
+    }
 	IEnumerator RiseSpikes ()
 	{
 		yield return new WaitForSeconds(3);

@@ -9,6 +9,7 @@ public class Level_33_Spikes_Script : MonoBehaviour {
 		if (col.transform.tag == "PLAYER")
 		{
 			Debug.Log("Spikes");
+			GameManager.GetInstance().playerEntity.Hit(1, null);
 		// Kill player, play death animation
 		} 
 	}

@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class Lava_script : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.isTrigger && col.tag == "PLAYER")
+        GameManager.GetInstance().playerEntity.Hit(100, null);
+    }
 }
