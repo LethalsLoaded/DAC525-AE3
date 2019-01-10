@@ -37,13 +37,25 @@ public class NPC_Dialogue_Script : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D col)
 	{
 		if (col.tag == "PLAYER")
+		{
 			speechIcon.SetActive(true);
+			StartCoroutine("TextBox");
+		}
 	}
 	void OnTriggerExit2D (Collider2D col)
 	{
 		if (col.tag == "PLAYER")
+		{
 			speechIcon.SetActive(false);
+			StopCoroutine("TextBox");
+		}
 	}
+	IEnumerator TextBox()
+	{
+		yield return new WaitForSeconds(2);
+		dialogue.SetActive(true);
+	}
+
 	IEnumerator Text ()
 	{
 		foreach (char characters in sentences[index].ToCharArray())

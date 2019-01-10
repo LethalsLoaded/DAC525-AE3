@@ -10420,12 +10420,10 @@ MonoBehaviour:
   dialogue: {fileID: 853463233}
   speechIcon: {fileID: 262120769}
   sentences:
-  - 'test szymon jedz makowke gr rtbgrbte rhrgbvgn brgbhtebr hnegbernt gbhtebgb gerbthn
-    ntye '
-  - zdanie numer dwa
-  - trzecia linia teksty
-  - kolejne zdanie
-  - test 2
+  - Huh........
+  - What are you doing here?
+  - You shouldn't be here.
+  - Get out while you can and never come back.
   speechSpeed: 0.03
   continueButton: {fileID: 1279541589}
   skipButton: {fileID: 806287468}
