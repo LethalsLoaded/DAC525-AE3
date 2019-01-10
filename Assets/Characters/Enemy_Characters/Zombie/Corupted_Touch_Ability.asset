@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918c3a0ab6a12f14eac52e2f7e648544, type: 3}
+  m_Name: Corupted_Touch_Ability
+  m_EditorClassIdentifier: 
+  abilityName: Corrupted Touch
+  abilityOwner: {fileID: 1972308582588370, guid: cb59b90af71cf7c42afe7de96eee98b4,
+    type: 2}
+  abilityDescription: 
+  abilityInstructions: 
+  abilityPrefab: {fileID: 0}
+  abilityAnimation: {fileID: 0}
+  abilityValue: 3
+  cooldownPeriod: 1
+  isActive: 0

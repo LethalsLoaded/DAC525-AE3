@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lever_Script : MonoBehaviour {
+public class Level_30_Lever_Script : MonoBehaviour {
 
 	bool isOpening, isClosing;
 	public float speed, maxY, minY;
@@ -25,7 +25,10 @@ public class Lever_Script : MonoBehaviour {
 		if (doors.transform.position.y >= maxY && isOpening)
 		doorsRb.velocity = Vector3.zero;
 		else if (doors.transform.position.y <= minY && isClosing)
-		doorsRb.velocity = Vector3.zero;
+		{
+			doorsRb.velocity = Vector3.zero;
+			doors.transform.position = new Vector2(doors.transform.position.x, minY);
+		}
 	}
 	void OnTriggerEnter2D (Collider2D col)
 	{

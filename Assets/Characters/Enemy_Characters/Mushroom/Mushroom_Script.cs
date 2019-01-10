@@ -36,7 +36,7 @@ public class Mushroom_Script : Entity {
 				{
 					Debug.Log(col.name);
 					GameManager.GetInstance().playerEntity.Hit(100, null);
-					col.gameObject.GetComponent<Mushroom_Script>().entityHitPoints -= 100;
+					col.gameObject.GetComponent<Mushroom_Script>().isDead = true;
 					// destroy player and mushroms if they are in radius
 				}
 			}			

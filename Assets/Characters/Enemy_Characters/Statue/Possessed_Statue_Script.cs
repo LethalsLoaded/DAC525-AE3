@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level_35_Possessed_Statue_Script : MonoBehaviour {
+public class Possessed_Statue_Script : MonoBehaviour {
 
 	bool isActivated;
 	 Color color;
@@ -44,7 +44,6 @@ public class Level_35_Possessed_Statue_Script : MonoBehaviour {
 		// kill player and change him into a statue
 	}
 	
-	// Update is called once per frame
 	void Update ()
 	{
 		if( isActivated)
@@ -55,9 +54,5 @@ public class Level_35_Possessed_Statue_Script : MonoBehaviour {
 				eye.color = color;
 			}
 		}
-
-		// if statue is destroyed
-		// doors are open
-		// doors.GetComponent<DoorScript>()._isDoorOpen = true;
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level_35_Statue_Script : Entity {
+public class Statue_Script : Entity {
 	public GameObject doors;
     protected override void OnDeath(Entity entityKiller = null)
     {
@@ -11,7 +11,7 @@ public class Level_35_Statue_Script : Entity {
 
     protected override void OnHit(Entity entityDamager)
     {
-        if (gameObject.GetComponent<Level_35_Possessed_Statue_Script>().enabled == false)
+        if (gameObject.GetComponent<Possessed_Statue_Script>().enabled == false)
 		{
 			// change player into statue
 			Debug.Log("Change player into statue");

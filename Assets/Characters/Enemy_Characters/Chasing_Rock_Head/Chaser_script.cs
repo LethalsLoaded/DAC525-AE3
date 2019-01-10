@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level_32_Chaser_script : Entity {
+public class Chaser_script : Entity {
 
 	public float rayLenght;
 	public bool isChasing;
