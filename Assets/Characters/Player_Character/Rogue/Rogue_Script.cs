@@ -142,6 +142,29 @@ public class Rogue_Script : Entity
         }
     }
 
+    private void CalculateMovement()
+    {
+        if(GameLevel.GetActiveLevel().levelNumber == 36)
+        {
+                if (_moveRight && !_moveLeft)
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(50 * entitySpeed, GetComponent<Rigidbody2D>().velocity.y));
+
+            else if (!_moveRight && _moveLeft)
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(-50 * entitySpeed, GetComponent<Rigidbody2D>().velocity.y));
+        }
+        else
+        {
+        if (_moveRight && !_moveLeft)
+                GetComponent<Rigidbody2D>().velocity = new Vector2(1 * entitySpeed, GetComponent<Rigidbody2D>().velocity.y);
+
+            else if (!_moveRight && _moveLeft)
+                GetComponent<Rigidbody2D>().velocity =
+                    new Vector2(-1 * entitySpeed, GetComponent<Rigidbody2D>().velocity.y);
+            else
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+        }
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -153,14 +176,7 @@ public class Rogue_Script : Entity
         entityIsOnGround = Physics2D.Raycast(transform.position, -transform.up, _rayLength, 1 << LayerMask.NameToLayer("Land"));
         Debug.DrawRay(transform.position, -transform.up, Color.gray);
 
-        if (_moveRight && !_moveLeft)
-            GetComponent<Rigidbody2D>().velocity = new Vector2(1 * entitySpeed, GetComponent<Rigidbody2D>().velocity.y);
-
-        else if (!_moveRight && _moveLeft)
-            GetComponent<Rigidbody2D>().velocity =
-                new Vector2(-1 * entitySpeed, GetComponent<Rigidbody2D>().velocity.y);
-        else
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+        CalculateMovement();
 
         // ********* LOCKPICK STUFF ************** //
 

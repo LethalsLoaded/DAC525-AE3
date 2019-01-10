@@ -10,7 +10,10 @@ public class HUD_Script : MonoBehaviour {
 	public Image[] live;
 
 	int lives;
-
+	void Start()
+	{
+		//GameManager.GetInstance().RemoveLife();
+	}
 	void Update ()
 	{
 		 lives = GameManager.GetInstance().GetLives();

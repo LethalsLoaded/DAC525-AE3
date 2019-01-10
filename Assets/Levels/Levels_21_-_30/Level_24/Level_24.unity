@@ -46662,7 +46662,8 @@ Transform:
 --- !u!1 &576985599
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1011256579364304, guid: fd225bbff776c1249a5cf6b0f4c4f21b,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -46671,6 +46672,7 @@ GameObject:
   - component: {fileID: 576985601}
   - component: {fileID: 576985600}
   - component: {fileID: 576985604}
+  - component: {fileID: 576985605}
   m_Layer: 31
   m_Name: Crimson Flame
   m_TagString: Untagged
@@ -46716,7 +46718,8 @@ CircleCollider2D:
 --- !u!212 &576985602
 SpriteRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 212094393806629200, guid: fd225bbff776c1249a5cf6b0f4c4f21b,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 576985599}
   m_Enabled: 1
@@ -46748,8 +46751,8 @@ SpriteRenderer:
   m_SortingLayerID: 778757463
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1bdf7fe2845e8a54b875793b0bca425a, type: 3}
-  m_Color: {r: 1, g: 0.21404596, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c11bc8d0f1cc7924eac0b24bc06ba4e7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -46762,7 +46765,8 @@ SpriteRenderer:
 --- !u!4 &576985603
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4518453496671006, guid: fd225bbff776c1249a5cf6b0f4c4f21b,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 576985599}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -46784,6 +46788,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 350
+--- !u!95 &576985605
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 95129047199266228, guid: fd225bbff776c1249a5cf6b0f4c4f21b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 576985599}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 726fc7768934b6341a0efeb3ec4d29ac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &727771756
 Prefab:
   m_ObjectHideFlags: 0
@@ -47307,6 +47330,7 @@ GameObject:
   - component: {fileID: 1020901440}
   - component: {fileID: 1020901439}
   - component: {fileID: 1020901438}
+  - component: {fileID: 1020901443}
   m_Layer: 31
   m_Name: Crimson Flame (1)
   m_TagString: Untagged
@@ -47396,8 +47420,8 @@ SpriteRenderer:
   m_SortingLayerID: 778757463
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1bdf7fe2845e8a54b875793b0bca425a, type: 3}
-  m_Color: {r: 1, g: 0.21404596, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c11bc8d0f1cc7924eac0b24bc06ba4e7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -47420,6 +47444,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1020901443
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1020901437}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 726fc7768934b6341a0efeb3ec4d29ac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1127698839
 GameObject:
   m_ObjectHideFlags: 0
@@ -47728,6 +47770,7 @@ GameObject:
   - component: {fileID: 1320714094}
   - component: {fileID: 1320714093}
   - component: {fileID: 1320714095}
+  - component: {fileID: 1320714096}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -47742,8 +47785,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1320714091}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.45, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 15.45, y: 0.55, z: 0}
+  m_LocalScale: {x: 1.2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1392127878}
   m_RootOrder: 3
@@ -47764,7 +47807,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 2.56, y: 1.09}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -47808,8 +47851,8 @@ SpriteRenderer:
   m_SortingLayerID: 1967067753
   m_SortingLayer: 1
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 1dd17e48da39d314daf4d8ea8a4bb274, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 38c553bb70d0eee418a41c85ca74c9ea, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -47830,6 +47873,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75856fdca3b395848b18ed48b89f6962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1320714096
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1320714091}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09b91f0872f025c4292fe0c3547dd013, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1392127877
 GameObject:
   m_ObjectHideFlags: 0
@@ -47945,6 +48006,7 @@ GameObject:
   - component: {fileID: 1447612041}
   - component: {fileID: 1447612040}
   - component: {fileID: 1447612042}
+  - component: {fileID: 1447612043}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -47959,8 +48021,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1447612038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.3599997, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 6.55, y: 0.63, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1392127878}
   m_RootOrder: 2
@@ -47981,7 +48043,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 2.56, y: 1.09}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -48025,8 +48087,8 @@ SpriteRenderer:
   m_SortingLayerID: 1967067753
   m_SortingLayer: 1
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 1dd17e48da39d314daf4d8ea8a4bb274, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 38c553bb70d0eee418a41c85ca74c9ea, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -48047,6 +48109,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75856fdca3b395848b18ed48b89f6962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1447612043
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1447612038}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09b91f0872f025c4292fe0c3547dd013, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1452553091
 GameObject:
   m_ObjectHideFlags: 0
@@ -56718,6 +56798,7 @@ GameObject:
   - component: {fileID: 1614014726}
   - component: {fileID: 1614014725}
   - component: {fileID: 1614014727}
+  - component: {fileID: 1614014728}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -56732,8 +56813,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1614014723}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.05, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -13.05, y: 0.55, z: 0}
+  m_LocalScale: {x: 1.7, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1392127878}
   m_RootOrder: 0
@@ -56754,7 +56835,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 2.56, y: 1.09}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -56798,8 +56879,8 @@ SpriteRenderer:
   m_SortingLayerID: 1967067753
   m_SortingLayer: 1
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 1dd17e48da39d314daf4d8ea8a4bb274, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 38c553bb70d0eee418a41c85ca74c9ea, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -56820,6 +56901,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75856fdca3b395848b18ed48b89f6962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1614014728
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1614014723}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09b91f0872f025c4292fe0c3547dd013, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1664513255
 GameObject:
   m_ObjectHideFlags: 0
@@ -56831,6 +56930,7 @@ GameObject:
   - component: {fileID: 1664513258}
   - component: {fileID: 1664513257}
   - component: {fileID: 1664513259}
+  - component: {fileID: 1664513260}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -56845,8 +56945,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1664513255}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.6599998, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -3.49, y: 0.53, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1392127878}
   m_RootOrder: 1
@@ -56867,7 +56967,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 2.56, y: 1.09}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -56911,8 +57011,8 @@ SpriteRenderer:
   m_SortingLayerID: 1967067753
   m_SortingLayer: 1
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 1dd17e48da39d314daf4d8ea8a4bb274, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 38c553bb70d0eee418a41c85ca74c9ea, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -56933,6 +57033,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75856fdca3b395848b18ed48b89f6962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1664513260
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1664513255}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09b91f0872f025c4292fe0c3547dd013, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1667595666
 GameObject:
   m_ObjectHideFlags: 0
@@ -56945,6 +57063,7 @@ GameObject:
   - component: {fileID: 1667595669}
   - component: {fileID: 1667595668}
   - component: {fileID: 1667595667}
+  - component: {fileID: 1667595672}
   m_Layer: 31
   m_Name: Crimson Flame (3)
   m_TagString: Untagged
@@ -57034,8 +57153,8 @@ SpriteRenderer:
   m_SortingLayerID: 778757463
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1bdf7fe2845e8a54b875793b0bca425a, type: 3}
-  m_Color: {r: 1, g: 0.21404596, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c11bc8d0f1cc7924eac0b24bc06ba4e7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -57058,6 +57177,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1667595672
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667595666}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 726fc7768934b6341a0efeb3ec4d29ac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!213 &1752639432
 Sprite:
   m_ObjectHideFlags: 0
@@ -57731,6 +57868,7 @@ GameObject:
   - component: {fileID: 2124145653}
   - component: {fileID: 2124145652}
   - component: {fileID: 2124145651}
+  - component: {fileID: 2124145656}
   m_Layer: 31
   m_Name: Crimson Flame (2)
   m_TagString: Untagged
@@ -57820,8 +57958,8 @@ SpriteRenderer:
   m_SortingLayerID: 778757463
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1bdf7fe2845e8a54b875793b0bca425a, type: 3}
-  m_Color: {r: 1, g: 0.21404596, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c11bc8d0f1cc7924eac0b24bc06ba4e7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -57844,6 +57982,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2124145656
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2124145650}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 726fc7768934b6341a0efeb3ec4d29ac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2143634909
 GameObject:
   m_ObjectHideFlags: 0
