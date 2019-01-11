@@ -15,7 +15,7 @@ using UnityEngine.UI;
 public class Inventory_Manager : MonoBehaviour
 {
     private static Inventory_Manager instance;
-
+    public GameObject inventoryWindow;
     public IDictionary<GameObject, Item> inventoryItems = new Dictionary<GameObject, Item>();
 
     private void Awake()
@@ -26,8 +26,6 @@ public class Inventory_Manager : MonoBehaviour
 
     private void Start()
     {
-        foreach (Transform item in GameObject.Find("Inventory Panel").transform)
-            inventoryItems.Add(item.gameObject, null);
     }
 
     public void AddItemToInventory(Item itemToAdd)

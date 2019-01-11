@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Linq;
-using UnityEditor.SceneManagement;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using Object = UnityEngine.Object;
-#if UNITY_EDITOR
 using UnityEditor;
-
-#endif
 
 // Author: JohannesMP (2018-08-12)
 //
@@ -120,7 +115,7 @@ public class SceneReference : ISerializationCallbackReceiver
             if (sceneAsset == null)
                 scenePath = string.Empty;
 
-            EditorSceneManager.MarkAllScenesDirty();
+            UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
         }
         // Asset takes precendence and overwrites Path
         else
@@ -145,7 +140,7 @@ public class SceneReference : ISerializationCallbackReceiver
                 scenePath = string.Empty;
 
             if (Application.isPlaying == false)
-                EditorSceneManager.MarkAllScenesDirty();
+                UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
         }
     }
 #endif
@@ -407,11 +402,11 @@ public class SceneReferencePropertyDrawer : PropertyDrawer
         private static bool QueryBuildSettingsStatus()
         {
             // If no version control provider, assume not readonly
-            if (Provider.enabled == false)
+            if (UnityEditor.VersionControl.Provider.enabled == false)
                 return false;
 
             // If we cannot checkout, then assume we are not readonly
-            if (Provider.hasCheckoutSupport == false)
+            if (UnityEditor.VersionControl.Provider.hasCheckoutSupport == false)
                 return false;
 
             //// If offline (and are using a version control provider that requires checkout) we cannot edit.
@@ -419,7 +414,7 @@ public class SceneReferencePropertyDrawer : PropertyDrawer
             //    return true;
 
             // Try to get status for file
-            var status = Provider.Status("ProjectSettings/EditorBuildSettings.asset", false);
+            var status = UnityEditor.VersionControl.Provider.Status("ProjectSettings/EditorBuildSettings.asset", false);
             status.Wait();
 
             // If no status listed we can edit
@@ -427,7 +422,7 @@ public class SceneReferencePropertyDrawer : PropertyDrawer
                 return true;
 
             // If is checked out, we can edit
-            if (status.assetList[0].IsState(Asset.States.CheckedOutLocal))
+            if (status.assetList[0].IsState(UnityEditor.VersionControl.Asset.States.CheckedOutLocal))
                 return false;
 
             return true;
