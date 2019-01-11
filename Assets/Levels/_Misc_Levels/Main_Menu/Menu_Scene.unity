@@ -791,8 +791,8 @@ MonoBehaviour:
     levelNumber: 1
     levelStartPoint: {x: -21, y: -8}
     sceneReference:
-      scenePath: Assets/Levels/Levels_1_-_10/Level_1/Level_1.unity
-      sceneAsset: {fileID: 102900000, guid: e94059063f4630349a11a5ba98c06201, type: 3}
+      scenePath: Assets/Levels/Levels_1_-_10/Level_3/Level_3.unity
+      sceneAsset: {fileID: 102900000, guid: 1b9db0182ddfc494b861c29946da510d, type: 3}
   - levelName: Stealth Ability
     levelNumber: 2
     levelStartPoint: {x: -21, y: -8}
@@ -1354,6 +1354,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1490242358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1490242356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ea60317ecbb394eb927ef98777382b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1490242359 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114962669332711650, guid: 17ae3b7c27f95ee44af512681b193c52,

@@ -14,7 +14,7 @@ MonoBehaviour:
   itemCategory: 0
   itemDescription: Vendor trash
   itemName: Red Gem
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1731121424223524, guid: a87410835b407fd459226aaee1d5ac95, type: 2}
   itemPrice: 15
   itemSprite: {fileID: 0}
   itemValue: 0

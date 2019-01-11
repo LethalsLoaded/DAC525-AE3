@@ -10,7 +10,7 @@ public class Gem_Prefab_Script : MonoBehaviour {
         if(!canPickup) return;
         if(collider.isTrigger || collider.tag != "PLAYER") return;
 
-        //player.AddItem(itemToAdd);
+        collider.GetComponent<Inventory_Manager>().AddItemToInventory(itemToAdd);
         Destroy(gameObject);
     }
 }
