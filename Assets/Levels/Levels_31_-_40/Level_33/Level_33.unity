@@ -372,7 +372,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &52144982
 GameObject:
@@ -472,7 +472,7 @@ Transform:
   - {fileID: 2272401}
   - {fileID: 881805633}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &59380108
 GameObject:
@@ -837,7 +837,7 @@ Transform:
   - {fileID: 934813346}
   - {fileID: 1733283411}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &215019737
 MonoBehaviour:
@@ -886,7 +886,7 @@ Transform:
   - {fileID: 1673279546}
   - {fileID: 1630942441}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &323753942
 GameObject:
@@ -1556,7 +1556,7 @@ Transform:
   - {fileID: 331133951}
   - {fileID: 589285322}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!213 &691592106
 Sprite:
@@ -1765,66 +1765,6 @@ Sprite:
   m_PhysicsShape: []
   m_Bones: []
   m_SpriteID: 
---- !u!1001 &727771756
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4624813851886404, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -17.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 4624813851886404, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 9.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4624813851886404, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4624813851886404, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4624813851886404, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4624813851886404, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4624813851886404, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4624813851886404, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1185922740059180, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114962669332711650, guid: 17ae3b7c27f95ee44af512681b193c52,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1185922740059180, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-      propertyPath: m_Name
-      value: Rogue_Character_Test
-      objectReference: {fileID: 0}
-    - target: {fileID: 61140754112754338, guid: 17ae3b7c27f95ee44af512681b193c52,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 17ae3b7c27f95ee44af512681b193c52, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &859217807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2167,7 +2107,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4826776395443186, guid: 4ca1e190cc1d15a469e829727320188a, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114163222330487860, guid: 4ca1e190cc1d15a469e829727320188a,
         type: 2}
@@ -15457,7 +15397,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1945292045
 BoxCollider2D:
